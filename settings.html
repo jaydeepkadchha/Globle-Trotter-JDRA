@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GlobeTrotter | Settings</title>
+
+  <!-- Same main CSS file from your pasted code -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ==============================
+       SETTINGS HEADER
+    ============================== */
+
+    .settings-hero {
+      background: var(--taupe);
+      color: white;
+      border-radius: 24px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 25px;
+    }
+
+    .settings-hero::after {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      right: -80px;
+      top: -110px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .settings-label {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 10px;
+      opacity: 0.7;
+    }
+
+    .settings-hero h1 {
+      font-size: 38px;
+      margin-top: 8px;
+      letter-spacing: -1px;
+    }
+
+    .settings-hero p {
+      margin-top: 7px;
+      font-size: 14px;
+      opacity: 0.82;
+    }
+
+    /* ==============================
+       SETTINGS GRID
+    ============================== */
+
+    .settings-layout {
+      display: grid;
+      grid-template-columns: 1.45fr 0.8fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .settings-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+    }
+
+    .settings-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section-title h3 {
+      font-size: 18px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* ==============================
+       PROFILE SETTINGS
+    ============================== */
+
+    .profile-setting {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .profile-avatar {
+      width: 58px;
+      height: 58px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--peach);
+      color: var(--dark);
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .profile-setting strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .profile-setting span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .change-photo {
+      margin-left: auto;
+      padding: 9px 12px;
+      border: none;
+      border-radius: 9px;
+      background: var(--pearl);
+      color: var(--dark);
+      font-size: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .change-photo:hover {
+      background: var(--seafoam);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-group.full {
+      grid-column: span 2;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #e7e5df;
+      border-radius: 10px;
+      outline: none;
+      font-size: 12px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--taupe);
+    }
+
+    /* ==============================
+       SETTINGS OPTIONS
+    ============================== */
+
+    .setting-option {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .setting-option:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .setting-icon {
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: var(--peach);
+      font-size: 17px;
+    }
+
+    .setting-info {
+      flex: 1;
+    }
+
+    .setting-info strong {
+      display: block;
+      font-size: 12px;
+    }
+
+    .setting-info p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.4;
+    }
+
+    .toggle {
+      position: relative;
+      width: 42px;
+      height: 23px;
+      flex-shrink: 0;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      background: #d9d7d1;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .slider::before {
+      content: "";
+      position: absolute;
+      width: 17px;
+      height: 17px;
+      left: 3px;
+      bottom: 3px;
+      border-radius: 50%;
+      background: white;
+      transition: 0.2s;
+    }
+
+    .toggle input:checked + .slider {
+      background: var(--taupe);
+    }
+
+    .toggle input:checked + .slider::before {
+      transform: translateX(19px);
+    }
+
+    /* ==============================
+       RIGHT COLUMN
+    ============================== */
+
+    .summary-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 23px;
+      margin-bottom: 18px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+    }
+
+    .summary-card h3 {
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 11px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .summary-row:last-child {
+      border-bottom: none;
+    }
+
+    .summary-row span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .summary-row strong {
+      font-size: 11px;
+      text-align: right;
+    }
+
+    .travel-preference {
+      margin-top: 16px;
+      padding: 13px;
+      border-radius: 12px;
+      background: var(--pearl);
+    }
+
+    .travel-preference strong {
+      display: block;
+      font-size: 11px;
+    }
+
+    .travel-preference p {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.4;
+    }
+
+    /* ==============================
+       ACTION BUTTONS
+    ============================== */
+
+    .actions {
+      display: flex;
+      gap: 9px;
+      margin-top: 20px;
+    }
+
+    .action-btn {
+      flex: 1;
+      padding: 11px 8px;
+      border: none;
+      border-radius: 9px;
+      background: var(--pearl);
+      color: var(--dark);
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .action-btn:hover {
+      background: var(--seafoam);
+    }
+
+    .action-btn.primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .action-btn.primary:hover {
+      background: var(--dark);
+    }
+
+    .danger-btn {
+      width: 100%;
+      margin-top: 13px;
+      padding: 11px;
+      border: 1px solid #f0d7d7;
+      border-radius: 9px;
+      background: #fff7f7;
+      color: #b95d5d;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* ==============================
+       RESPONSIVE
+    ============================== */
+
+    @media (max-width: 950px) {
+      .settings-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .settings-hero {
+        padding: 24px;
+      }
+
+      .settings-hero h1 {
+        font-size: 29px;
+      }
+
+      .settings-card {
+        padding: 18px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full {
+        grid-column: auto;
+      }
+
+      .change-photo {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo">
+        <h1>✈ Globe<span>Trotter</span></h1>
+        <p>Plan. Explore. Experience.</p>
+      </div>
+
+      <nav class="nav">
+        <a href="dashboard.html" class="nav-item">
+          <span>⌂</span> Dashboard
+        </a>
+
+        <a href="trips.html" class="nav-item">
+          <span>🧳</span> My Trips
+        </a>
+
+        <a href="explore.html" class="nav-item">
+          <span>🗺️</span> Explore
+        </a>
+
+        <a href="calendar.html" class="nav-item">
+          <span>▣</span> Calendar
+        </a>
+
+        <a href="budget.html" class="nav-item">
+          <span>💰</span> Budget
+        </a>
+
+        <a href="settings.html" class="nav-item active">
+          <span>⚙</span> Settings
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <a href="profile.html" class="profile-mini">
+          <div class="avatar" id="sidebarInitials">YG</div>
+
+          <div>
+            <strong id="sidebarName">Guest User</strong>
+            <small>Pro Traveler</small>
+          </div>
+        </a>
+
+        <a href="login.html" class="nav-item" id="logoutButton">
+          <span>↪</span> Logout
+        </a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="settings-hero">
+        <div class="hero-content">
+          <div class="settings-label">Account Preferences</div>
+          <h1>Settings</h1>
+          <p>Personalize your GlobeTrotter experience and manage your account.</p>
+        </div>
+      </section>
+
+      <div class="settings-layout">
+        <section>
+          <div class="settings-card">
+            <div class="section-title">
+              <div>
+                <h3>Profile Information</h3>
+                <p>Keep your account details up to date.</p>
+              </div>
+            </div>
+
+            <div class="profile-setting">
+              <div class="profile-avatar" id="profileInitials">YG</div>
+
+              <div>
+                <strong id="profileName">Guest User</strong>
+                <span id="profileEmail">guest@example.com</span>
+              </div>
+
+              <button class="change-photo" type="button">Change Photo</button>
+            </div>
+
+            <form id="settingsForm">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="fullName">Full Name</label>
+                  <input type="text" id="fullName" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="username">Username</label>
+                  <input type="text" id="username" required />
+                </div>
+
+                <div class="form-group full">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="email" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="country">Country</label>
+                  <select id="country">
+                    <option value="">Select your country</option>
+                    <option value="India">India</option>
+                    <option value="Japan">Japan</option>
+                    <option value="United States">United States</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="travelStyle">Travel Style</label>
+                  <select id="travelStyle">
+                    <option value="">Select travel style</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Beach">Beach</option>
+                    <option value="Culture">Culture</option>
+                    <option value="Luxury">Luxury</option>
+                    <option value="Budget">Budget Travel</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="actions">
+                <button class="action-btn" type="reset">Reset</button>
+                <button class="action-btn primary" type="submit">Save Changes</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="settings-card">
+            <div class="section-title">
+              <div>
+                <h3>Notifications</h3>
+                <p>Choose when GlobeTrotter should notify you.</p>
+              </div>
+            </div>
+
+            <div class="setting-option">
+              <div class="setting-icon">✈️</div>
+              <div class="setting-info">
+                <strong>Trip Reminders</strong>
+                <p>Get reminders before an upcoming trip begins.</p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" checked />
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-option">
+              <div class="setting-icon">📅</div>
+              <div class="setting-info">
+                <strong>Calendar Events</strong>
+                <p>Receive updates for activities and scheduled plans.</p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" checked />
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-option">
+              <div class="setting-icon">💰</div>
+              <div class="setting-info">
+                <strong>Budget Alerts</strong>
+                <p>Be notified when your spending reaches the set limit.</p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" checked />
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="setting-option">
+              <div class="setting-icon">✨</div>
+              <div class="setting-info">
+                <strong>Travel Recommendations</strong>
+                <p>Discover personalized destinations and travel ideas.</p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" />
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <aside>
+          <div class="summary-card">
+            <h3>Account Overview</h3>
+
+            <div class="summary-row">
+              <span>Membership</span>
+              <strong>Pro Traveler</strong>
+            </div>
+
+            <div class="summary-row">
+              <span>Member Since</span>
+              <strong>August 2026</strong>
+            </div>
+
+            <div class="summary-row">
+              <span>Upcoming Trips</span>
+              <strong>3 Trips</strong>
+            </div>
+
+            <div class="summary-row">
+              <span>Saved Places</span>
+              <strong>12 Places</strong>
+            </div>
+
+            <div class="travel-preference">
+              <strong>✨ Your Travel Preference</strong>
+              <p id="preferenceText">
+                Add your travel style to get better destination recommendations.
+              </p>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <h3>Security</h3>
+
+            <div class="setting-option">
+              <div class="setting-icon">🔒</div>
+              <div class="setting-info">
+                <strong>Password</strong>
+                <p>Last changed recently.</p>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="action-btn" type="button" onclick="alert('Password reset feature will be connected to your backend.')">
+                Change Password
+              </button>
+            </div>
+
+            <button class="danger-btn" type="button" onclick="deleteAccount()">
+              Delete My Account
+            </button>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    let user = JSON.parse(localStorage.getItem("loggedInUser")) || {
+      fullName: "Guest User",
+      username: "guestuser",
+      email: "guest@example.com",
+      country: "",
+      travelStyle: ""
+    };
+
+    function getInitials(name) {
+      return name
+        .trim()
+        .split(" ")
+        .map(word => word[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase();
+    }
+
+    function loadUserData() {
+      document.getElementById("fullName").value = user.fullName || "";
+      document.getElementById("username").value = user.username || "";
+      document.getElementById("email").value = user.email || "";
+      document.getElementById("country").value = user.country || "";
+      document.getElementById("travelStyle").value = user.travelStyle || "";
+
+      document.getElementById("profileName").textContent = user.fullName;
+      document.getElementById("profileEmail").textContent = user.email;
+      document.getElementById("sidebarName").textContent = user.fullName;
+
+      const initials = getInitials(user.fullName);
+      document.getElementById("profileInitials").textContent = initials;
+      document.getElementById("sidebarInitials").textContent = initials;
+
+      if (user.travelStyle) {
+        document.getElementById("preferenceText").textContent =
+          "You enjoy " + user.travelStyle.toLowerCase() +
+          " travel experiences. Your recommendations will be personalized.";
+      }
+    }
+
+    document.getElementById("settingsForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      user = {
+        ...user,
+        fullName: document.getElementById("fullName").value,
+        username: document.getElementById("username").value,
+        email: document.getElementById("email").value,
+        country: document.getElementById("country").value,
+        travelStyle: document.getElementById("travelStyle").value
+      };
+
+      localStorage.setItem("loggedInUser", JSON.stringify(user));
+      loadUserData();
+      alert("Settings saved successfully.");
+    });
+
+    document.getElementById("logoutButton").addEventListener("click", function () {
+      localStorage.removeItem("loggedInUser");
+    });
+
+    function deleteAccount() {
+      const confirmed = confirm("Are you sure you want to delete your account?");
+
+      if (confirmed) {
+        localStorage.removeItem("loggedInUser");
+        window.location.href = "login.html";
+      }
+    }
+
+    loadUserData();
+  </script>
+</body>
+</html>
