@@ -3,9 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TravelGo | Create Account</title>
+  <title>GlobeTrotter | Create Account</title>
 
   <style>
+
+    /* =========================
+       COLOR PALETTE
+    ========================== */
+
+    :root {
+      --pearl: #E9E3DE;
+      --taupe: #A5937B;
+      --peach: #E3C49B;
+      --charcoal: #666161;
+      --seafoam: #B8D8D0;
+
+      --dark: #3F3B3B;
+      --muted: #817A78;
+      --white: #FFFFFF;
+    }
+
+
+    /* =========================
+       RESET
+    ========================== */
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -13,23 +35,52 @@
       font-family: Arial, sans-serif;
     }
 
+
+    /* =========================
+       BODY
+    ========================== */
+
     body {
       min-height: 100vh;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       padding: 24px;
-      background: linear-gradient(135deg, #0b5ed7, #5ac8fa);
+
+      background: linear-gradient(
+        135deg,
+        var(--pearl),
+        #F3EEE9
+      );
     }
+
+
+    /* =========================
+       REGISTER CARD
+    ========================== */
 
     .register-card {
       width: 100%;
       max-width: 460px;
+
       padding: 34px 32px;
+
       border-radius: 18px;
+
       background: rgba(255, 255, 255, 0.96);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+
+      box-shadow:
+        0 15px 40px rgba(102, 97, 97, 0.18);
+
+      border: 1px solid rgba(165, 147, 123, 0.18);
     }
+
+
+    /* =========================
+       BRAND
+    ========================== */
 
     .brand {
       text-align: center;
@@ -37,15 +88,45 @@
     }
 
     .brand h1 {
-      color: #0b5ed7;
+      color: var(--charcoal);
+
       font-size: 30px;
+
       margin-bottom: 8px;
+
+      letter-spacing: -0.5px;
+    }
+
+    .brand h1 span {
+      color: var(--taupe);
     }
 
     .brand p {
-      color: #666;
+      color: var(--muted);
       font-size: 14px;
     }
+
+    /* Small Seafoam accent */
+
+    .brand::after {
+      content: "";
+
+      display: block;
+
+      width: 42px;
+      height: 4px;
+
+      margin: 16px auto 0;
+
+      border-radius: 10px;
+
+      background: var(--seafoam);
+    }
+
+
+    /* =========================
+       INPUTS
+    ========================== */
 
     .input-group {
       margin-bottom: 16px;
@@ -53,132 +134,271 @@
 
     label {
       display: block;
+
       margin-bottom: 7px;
-      color: #333;
+
+      color: var(--dark);
+
       font-size: 14px;
       font-weight: bold;
     }
 
     input {
       width: 100%;
+
       padding: 13px;
+
       outline: none;
-      border: 1px solid #ddd;
+
+      border: 1px solid #D8D1CC;
+
       border-radius: 9px;
+
       font-size: 15px;
+
+      color: var(--dark);
+
+      background: #FCFAF8;
+
       transition: 0.3s;
     }
 
-    input:focus {
-      border-color: #0b5ed7;
-      box-shadow: 0 0 0 3px rgba(11, 94, 215, 0.15);
+    input::placeholder {
+      color: #AAA3A0;
     }
+
+    input:focus {
+      border-color: var(--taupe);
+
+      box-shadow:
+        0 0 0 3px rgba(165, 147, 123, 0.16);
+
+      background: white;
+    }
+
+
+    /* =========================
+       TERMS
+    ========================== */
 
     .terms {
       display: flex;
+
       align-items: flex-start;
+
       gap: 8px;
+
       margin: 18px 0;
-      color: #666;
+
+      color: var(--muted);
+
       font-size: 13px;
+
       line-height: 1.4;
     }
 
     .terms input {
       width: auto;
+
       margin-top: 2px;
+
+      accent-color: var(--taupe);
     }
 
     .terms a,
     .login-text a {
-      color: #0b5ed7;
+      color: var(--taupe);
+
       font-weight: bold;
+
       text-decoration: none;
     }
+
+    .terms a:hover,
+    .login-text a:hover {
+      color: var(--charcoal);
+    }
+
+
+    /* =========================
+       BUTTONS
+    ========================== */
 
     .register-btn,
     .social-btn {
       width: 100%;
+
       padding: 13px;
+
       border-radius: 9px;
+
       font-size: 15px;
       font-weight: bold;
+
       cursor: pointer;
+
       transition: 0.3s;
     }
 
     .register-btn {
       border: none;
-      background: #0b5ed7;
+
+      background: var(--charcoal);
+
       color: white;
     }
 
     .register-btn:hover {
-      background: #094bac;
+      background: #514D4D;
+
       transform: translateY(-1px);
+
+      box-shadow:
+        0 6px 15px rgba(102, 97, 97, 0.22);
     }
+
+
+    /* =========================
+       DIVIDER
+    ========================== */
 
     .divider {
       display: flex;
+
       align-items: center;
+
       gap: 12px;
+
       margin: 22px 0;
-      color: #888;
+
+      color: var(--muted);
+
       font-size: 13px;
     }
 
     .divider::before,
     .divider::after {
       content: "";
+
       flex: 1;
+
       height: 1px;
-      background: #ddd;
+
+      background: #DDD6D1;
     }
+
+
+    /* =========================
+       SOCIAL BUTTONS
+    ========================== */
 
     .social-btn {
       display: flex;
+
       align-items: center;
       justify-content: center;
+
       gap: 10px;
+
       margin-bottom: 12px;
-      border: 1px solid #ddd;
+
+      border: 1px solid #D8D1CC;
+
       background: white;
-      color: #333;
+
+      color: var(--dark);
     }
 
     .social-btn:hover {
-      background: #f5f5f5;
+      background: var(--pearl);
+
+      border-color: var(--taupe);
     }
 
     .github-btn {
       border: none;
-      background: #24292f;
+
+      background: var(--charcoal);
+
       color: white;
     }
 
     .github-btn:hover {
-      background: #111;
+      background: #514D4D;
     }
+
+
+    /* =========================
+       LOGIN TEXT
+    ========================== */
 
     .login-text {
       margin-top: 20px;
-      color: #666;
+
+      color: var(--muted);
+
       text-align: center;
+
       font-size: 14px;
     }
+
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 500px) {
+
+      body {
+        padding: 15px;
+      }
+
+      .register-card {
+        padding: 30px 24px;
+      }
+
+      .brand h1 {
+        font-size: 27px;
+      }
+
+    }
+
   </style>
 </head>
 
+
 <body>
+
   <main class="register-card">
+
+    <!-- BRAND -->
+
     <div class="brand">
-      <h1>✈ TravelGo</h1>
-      <p>Create your account and start exploring.</p>
+
+      <h1>
+        ✈ Globe<span>Trotter</span>
+      </h1>
+
+      <p>
+        Create your account and start exploring.
+      </p>
+
     </div>
 
+
+    <!-- REGISTER FORM -->
+
     <form id="registerForm">
+
+
+      <!-- FULL NAME -->
+
       <div class="input-group">
-        <label for="fullName">Full Name</label>
+
+        <label for="fullName">
+          Full Name
+        </label>
+
         <input
           type="text"
           id="fullName"
@@ -186,10 +406,18 @@
           placeholder="Enter your full name"
           required
         />
+
       </div>
 
+
+      <!-- USERNAME -->
+
       <div class="input-group">
-        <label for="username">Username</label>
+
+        <label for="username">
+          Username
+        </label>
+
         <input
           type="text"
           id="username"
@@ -197,10 +425,18 @@
           placeholder="Choose a username"
           required
         />
+
       </div>
 
+
+      <!-- EMAIL -->
+
       <div class="input-group">
-        <label for="email">Email Address</label>
+
+        <label for="email">
+          Email Address
+        </label>
+
         <input
           type="email"
           id="email"
@@ -208,10 +444,18 @@
           placeholder="Enter your email address"
           required
         />
+
       </div>
 
+
+      <!-- PASSWORD -->
+
       <div class="input-group">
-        <label for="password">Password</label>
+
+        <label for="password">
+          Password
+        </label>
+
         <input
           type="password"
           id="password"
@@ -220,10 +464,18 @@
           minlength="6"
           required
         />
+
       </div>
 
+
+      <!-- CONFIRM PASSWORD -->
+
       <div class="input-group">
-        <label for="confirmPassword">Confirm Password</label>
+
+        <label for="confirmPassword">
+          Confirm Password
+        </label>
+
         <input
           type="password"
           id="confirmPassword"
@@ -232,45 +484,116 @@
           minlength="6"
           required
         />
+
       </div>
 
+
+      <!-- TERMS -->
+
       <label class="terms">
-        <input type="checkbox" required />
+
+        <input
+          type="checkbox"
+          required
+        />
+
         <span>
-          I agree to the <a href="#">Terms of Service</a> and
+
+          I agree to the
+          <a href="#">Terms of Service</a>
+          and
           <a href="#">Privacy Policy</a>.
+
         </span>
+
       </label>
 
-      <button class="register-btn" type="submit">Create Account</button>
+
+      <!-- REGISTER -->
+
+      <button
+        class="register-btn"
+        type="submit">
+
+        Create Account
+
+      </button>
+
     </form>
 
-    <div class="divider">OR</div>
 
-    <button class="social-btn" type="button">
+    <!-- DIVIDER -->
+
+    <div class="divider">
+      OR
+    </div>
+
+
+    <!-- GOOGLE -->
+
+    <button
+      class="social-btn"
+      type="button">
+
       🔵 Continue with Google
+
     </button>
 
-    <button class="social-btn github-btn" type="button">
+
+    <!-- GITHUB -->
+
+    <button
+      class="social-btn github-btn"
+      type="button">
+
       ⌘ Continue with GitHub
+
     </button>
+
+
+    <!-- LOGIN -->
 
     <p class="login-text">
+
       Already have an account?
-      <a href="login.html">Login</a>
+
+      <a href="login.html">
+        Login
+      </a>
+
     </p>
+
   </main>
 
-  <script>
-    document.getElementById("registerForm").addEventListener("submit", function (event) {
-      const password = document.getElementById("password").value;
-      const confirmPassword = document.getElementById("confirmPassword").value;
 
-      if (password !== confirmPassword) {
-        event.preventDefault();
-        alert("Passwords do not match.");
-      }
-    });
+  <!-- =========================
+       VALIDATION
+  ========================== -->
+
+  <script>
+
+    document
+      .getElementById("registerForm")
+      .addEventListener("submit", function (event) {
+
+        const password =
+          document.getElementById("password").value;
+
+        const confirmPassword =
+          document.getElementById("confirmPassword").value;
+
+
+        if (password !== confirmPassword) {
+
+          event.preventDefault();
+
+          alert("Passwords do not match.");
+
+        }
+
+      });
+
   </script>
+
 </body>
 </html>
