@@ -37,6 +37,5 @@ $_SESSION['username'] = $user['username'];
 
 unset($user['password_hash']);
 
-sendResponse(true, 'Login successful.', [
-    'user' => $user
-]);
+header("Location: dashboard.html");
+exit();

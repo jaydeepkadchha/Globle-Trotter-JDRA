@@ -118,9 +118,5 @@ session_regenerate_id(true);
 $_SESSION['user_id'] = $userId;
 $_SESSION['username'] = $username;
 
-sendResponse(true, 'Registration successful.', [
-    'user_id' => $userId,
-    'username' => $username,
-    'first_name' => $firstName,
-    'last_name' => $lastName
-], 201);
+header("Location: login.html");
+exit();
