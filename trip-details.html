@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GlobeTrotter | Trip Itinerary</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* =================================================
+           TRIP DETAILS
+        ================================================= */
+
+        .trip-header {
+            background: var(--taupe);
+            color: white;
+            border-radius: 22px;
+            padding: 30px;
+            margin-bottom: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trip-header::after {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            right: -70px;
+            top: -100px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 22px;
+            color: rgba(255,255,255,0.75);
+            font-size: 12px;
+        }
+
+        .back-link:hover {
+            color: white;
+        }
+
+        .trip-header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .trip-label {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 10px;
+            opacity: 0.7;
+        }
+
+        .trip-header h1 {
+            margin-top: 7px;
+            font-size: 34px;
+            letter-spacing: -1px;
+        }
+
+        .trip-header p {
+            margin-top: 7px;
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        .trip-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .trip-stat {
+            padding: 9px 13px;
+            border-radius: 9px;
+            background: rgba(255,255,255,0.12);
+            font-size: 11px;
+        }
+
+        /* =================================================
+           LAYOUT
+        ================================================= */
+
+        .trip-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 0.8fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .itinerary-card,
+        .trip-summary {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .itinerary-card {
+            padding: 25px;
+        }
+
+        .itinerary-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .itinerary-title h3 {
+            font-size: 18px;
+        }
+
+        .generated-badge {
+            padding: 6px 9px;
+            border-radius: 8px;
+            background: var(--seafoam);
+            color: var(--dark);
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        /* =================================================
+           DAY CARDS
+        ================================================= */
+
+        .day-card {
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            margin-bottom: 13px;
+            overflow: hidden;
+        }
+
+        .day-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 17px;
+            background: var(--pearl);
+        }
+
+        .day-title {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .day-number {
+            width: 32px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+            border-radius: 9px;
+            background: var(--primary);
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .day-title h4 {
+            font-size: 13px;
+        }
+
+        .day-title span {
+            display: block;
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .day-header > span {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* =================================================
+           ACTIVITIES
+        ================================================= */
+
+        .activities {
+            padding: 5px 17px 13px;
+        }
+
+        .activity {
+            display: flex;
+            gap: 13px;
+            padding: 13px 0;
+            border-bottom: 1px solid #eee9e5;
+        }
+
+        .activity:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 34px;
+            height: 34px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 9px;
+            background: var(--peach);
+            font-size: 15px;
+        }
+
+        .activity-info {
+            flex: 1;
+        }
+
+        .activity-info strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .activity-info p {
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: 10px;
+            line-height: 1.4;
+        }
+
+        .activity-time {
+            color: var(--taupe);
+            font-size: 10px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* =================================================
+           SUMMARY
+        ================================================= */
+
+        .trip-summary {
+            padding: 22px;
+        }
+
+        .summary-title {
+            font-size: 16px;
+            margin-bottom: 18px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee9e5;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .summary-row span {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .summary-row strong {
+            font-size: 11px;
+            text-align: right;
+        }
+
+        /* =================================================
+           BUDGET
+        ================================================= */
+
+        .mini-budget {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .mini-budget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mini-budget-header strong {
+            font-size: 13px;
+        }
+
+        .mini-budget-header span {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .mini-budget-track {
+            height: 7px;
+            margin-top: 12px;
+            background: var(--pearl);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .mini-budget-fill {
+            width: 62%;
+            height: 100%;
+            background: var(--taupe);
+            border-radius: 10px;
+        }
+
+        /* =================================================
+           ACTIONS
+        ================================================= */
+
+        .trip-actions {
+            display: flex;
+            gap: 9px;
+            margin-top: 18px;
+        }
+
+        .trip-action {
+            flex: 1;
+            padding: 11px 8px;
+            border-radius: 9px;
+            background: var(--pearl);
+            color: var(--dark);
+            font-size: 11px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .trip-action:hover {
+            background: var(--seafoam);
+            transform: translateY(-2px);
+        }
+
+        .trip-action.primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .trip-action.primary:hover {
+            background: var(--dark);
+        }
+
+        /* =================================================
+           RESPONSIVE
+        ================================================= */
+
+        @media (max-width: 950px) {
+
+            .trip-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .trip-summary {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .trip-header {
+                padding: 23px;
+            }
+
+            .trip-header h1 {
+                font-size: 27px;
+            }
+
+            .itinerary-card {
+                padding: 18px;
+            }
+
+            .day-header {
+                align-items: flex-start;
+            }
+
+            .activity-time {
+                display: none;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h1>
+                ✈ Globe<span>Trotter</span>
+            </h1>
+
+            <p>
+                Plan. Explore. Experience.
+            </p>
+
+        </div>
+
+
+        <nav class="nav">
+
+            <a href="dashboard.html" class="nav-item">
+                <span>⌂</span>
+                Dashboard
+            </a>
+
+            <a href="my-trips.html" class="nav-item active">
+                <span>🧳</span>
+                My Trips
+            </a>
+
+            <a href="create-trip.html" class="nav-item">
+                <span>＋</span>
+                Create Trip
+            </a>
+
+            <a href="calendar.html" class="nav-item">
+                <span>▣</span>
+                Calendar
+            </a>
+
+            <a href="profile.html" class="nav-item">
+                <span>◎</span>
+                Profile
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="profile-mini">
+
+                <div class="avatar">
+                    A
+                </div>
+
+                <div>
+
+                    <strong>Arhan</strong>
+
+                    <small>
+                        Traveler
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <a href="login.html" class="nav-item">
+
+                <span>↪</span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =================================================
+         MAIN
+    ================================================== -->
+
+    <main class="main">
+
+
+        <!-- TRIP HEADER -->
+
+        <section class="trip-header">
+
+            <div class="trip-header-content">
+
+                <a href="dashboard.html" class="back-link">
+                    ← Back to Dashboard
+                </a>
+
+                <div class="trip-label">
+                    Your upcoming adventure
+                </div>
+
+                <h1>
+                    Japan Adventure 🇯🇵
+                </h1>
+
+                <p>
+                    Tokyo · Kyoto · Osaka
+                </p>
+
+
+                <div class="trip-stats">
+
+                    <span class="trip-stat">
+                        📅 12 Oct – 21 Oct
+                    </span>
+
+                    <span class="trip-stat">
+                        🕐 10 Days
+                    </span>
+
+                    <span class="trip-stat">
+                        👥 2 Travelers
+                    </span>
+
+                    <span class="trip-stat">
+                        💰 ₹85,000 Budget
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <div class="trip-layout">
+
+
+            <!-- =================================================
+                 ITINERARY
+            ================================================== -->
+
+            <section class="itinerary-card">
+
+                <div class="itinerary-title">
+
+                    <h3>
+                        Your Itinerary
+                    </h3>
+
+                    <span class="generated-badge">
+                        ✨ PERSONALIZED
+                    </span>
+
+                </div>
+
+
+
+                <!-- DAY 1 -->
+
+                <article class="day-card">
+
+                    <div class="day-header">
+
+                        <div class="day-title">
+
+                            <div class="day-number">
+                                01
+                            </div>
+
+                            <div>
+
+                                <h4>
+                                    Arrival in Tokyo
+                                </h4>
+
+                                <span>
+                                    Saturday · 12 October
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <span>
+                            Arrival Day
+                        </span>
+
+                    </div>
+
+
+                    <div class="activities">
+
+
+                        <div class="activity">
+
+                            <div class="activity-icon">
+                                ✈️
+                            </div>
+
+                            <div class="activity-info">
+
+                                <strong>
+                                    Arrive at Haneda Airport
+                                </strong>
+
+                                <p>
+                                    Pick up your luggage and
+                                    head into the city.
+                                </p>
+
+                            </div>
+
+                            <span class="activity-time">
+                                10:30 AM
+                            </span>
+
+                        </div>
+
+
+                        <div class="activity">
+
+                            <div class="activity-icon">
+                                🏨
+                            </div>
+
+                            <div class="activity-info">
+
+                                <strong>
+                                    Hotel Check-in
+                                </strong>
+
+                                <p>
+                                    Drop your bags and take
+                                    some time to settle in.
+                                </p>
+
+                            </div>
+
+                            <span class="activity-time">
+                                1:00 PM
+                            </span>
+
+                        </div>
+
+
+                        <div class="activity">
+
+                            <div class="activity-icon">
+                                🍜
+                            </div>
+
+                            <div class="activity-info">
+
+                                <strong>
+                                    Dinner in Shibuya
+                                </strong>
+
+                                <p>
+                                    Explore local ramen spots
+                                    around Shibuya.
+                                </p>
+
+                            </div>
+
+                            <span class="activity-time">
+                                7:00 PM
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- DAY 2 -->
+
+                <article class="day-card">
+
+                    <div class="day-header">
+
+                        <div class="day-title">
+
+                            <div class="day-number">
+                                02
+                            </div>
+
+                            <div>
+
+                                <h4>
+                                    Tokyo Highlights
+                                </h4>
+
+                                <span>
+                                    Sunday · 13 October
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <span>
+                            Explore
+                        </span>
+
+                    </div>
+
+
+                    <div class="activities">
+
+
+                        <div class="activity">
+
+                            <div class="activity-icon">
+                                🗼
+                            </div>
+
+                            <div class="activity-info">
+
+                                <strong>
+                                    Tokyo Tower
+                                </strong>
+
+                                <p>
+                                    Start the morning with
+                                    panoramic city views.
+                                </p>
+
+                            </div>
+
+                            <span class="activity-time">
+                                9:00 AM
+                            </span>
+
+                        </div>
+
+
+                        <div class="activity">
+
+                            <div class="activity-icon">
+                                🍣
+                            </div>
+
+                            <div class="activity-info">
+
+                                <strong>
+                                    Tsukiji Outer Market
+                                </strong>
+
+                                <p>
+                                    Grab lunch and explore
+                                    Tokyo's famous food market.
+                                </p>
+
+                            </div>
+
+                            <span class="activity-time">
+                                12:30 PM
+                            </span>
+
+                        </div>
+
+
+                        <div class="activity">
+
+                            <div class="activity-icon">
+                                🌃
+                            </div>
+
+                            <div class="activity-info">
+
+                                <strong>
+                                    Shibuya Crossing
+                                </strong>
+
+                                <p>
+                                    Explore Shibuya and watch
+                                    the city come alive at night.
+                                </p>
+
+                            </div>
+
+                            <span class="activity-time">
+                                6:00 PM
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- DAY 3 -->
+
+                <article class="day-card">
+
+                    <div class="day-header">
+
+                        <div class="day-title">
+
+                            <div class="day-number">
+                                03
+                            </div>
+
+                            <div>
+
+                                <h4>
+                                    Kyoto Calling
+                                </h4>
+
+                                <span>
+                                    Monday · 14 October
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <span>
+                            Culture
+                        </span>
+
+                    </div>
+
+
+                    <div class="activities">
+
+
+                        <div class="activity">
+
+                            <div class="activity-icon">
+                                🚄
+                            </div>
+
+                            <div class="activity-info">
+
+                                <strong>
+                                    Shinkansen to Kyoto
+                                </strong>
+
+                                <p>
+                                    Take the bullet train and
+                                    enjoy the Japanese countryside.
+                                </p>
+
+                            </div>
+
+                            <span class="activity-time">
+                                8:00 AM
+                            </span>
+
+                        </div>
+
+
+                        <div class="activity">
+
+                            <div class="activity-icon">
+                                ⛩️
+                            </div>
+
+                            <div class="activity-info">
+
+                                <strong>
+                                    Fushimi Inari Shrine
+                                </strong>
+
+                                <p>
+                                    Walk through the iconic
+                                    thousands of torii gates.
+                                </p>
+
+                            </div>
+
+                            <span class="activity-time">
+                                11:30 AM
+                            </span>
+
+                        </div>
+
+
+                        <div class="activity">
+
+                            <div class="activity-icon">
+                                🍵
+                            </div>
+
+                            <div class="activity-info">
+
+                                <strong>
+                                    Gion Evening Walk
+                                </strong>
+
+                                <p>
+                                    Finish the day exploring
+                                    Kyoto's historic streets.
+                                </p>
+
+                            </div>
+
+                            <span class="activity-time">
+                                6:30 PM
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- DAY 4 -->
+
+                <article class="day-card">
+
+                    <div class="day-header">
+
+                        <div class="day-title">
+
+                            <div class="day-number">
+                                04
+                            </div>
+
+                            <div>
+
+                                <h4>
+                                    Kyoto at Your Pace
+                                </h4>
+
+                                <span>
+                                    Tuesday · 15 October
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <span>
+                            Relax
+                        </span>
+
+                    </div>
+
+
+                    <div class="activities">
+
+                        <div class="activity">
+
+                            <div class="activity-icon">
+                                🏯
+                            </div>
+
+                            <div class="activity-info">
+
+                                <strong>
+                                    Kinkaku-ji
+                                </strong>
+
+                                <p>
+                                    Visit Kyoto's famous
+                                    Golden Pavilion.
+                                </p>
+
+                            </div>
+
+                            <span class="activity-time">
+                                9:30 AM
+                            </span>
+
+                        </div>
+
+
+                        <div class="activity">
+
+                            <div class="activity-icon">
+                                🌿
+                            </div>
+
+                            <div class="activity-info">
+
+                                <strong>
+                                    Arashiyama Bamboo Grove
+                                </strong>
+
+                                <p>
+                                    Spend a quiet afternoon
+                                    surrounded by nature.
+                                </p>
+
+                            </div>
+
+                            <span class="activity-time">
+                                2:00 PM
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 TRIP SUMMARY
+            ================================================== -->
+
+            <aside>
+
+
+                <div class="trip-summary">
+
+                    <h3 class="summary-title">
+                        Trip Overview
+                    </h3>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Destination
+                        </span>
+
+                        <strong>
+                            Japan
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Duration
+                        </span>
+
+                        <strong>
+                            10 Days
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Travelers
+                        </span>
+
+                        <strong>
+                            2 People
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Travel Style
+                        </span>
+
+                        <strong>
+                            Culture + Relaxed
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Interests
+                        </span>
+
+                        <strong>
+                            Food, Nature,
+                            Photography
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- BUDGET -->
+
+                    <div class="mini-budget">
+
+                        <div class="mini-budget-header">
+
+                            <strong>
+                                Trip Budget
+                            </strong>
+
+                            <span>
+                                ₹52,700 / ₹85,000
+                            </span>
+
+                        </div>
+
+
+                        <div class="mini-budget-track">
+
+                            <div class="mini-budget-fill"></div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="trip-actions">
+
+                        <button
+                            class="trip-action">
+
+                            ✎ Edit
+
+                        </button>
+
+                        <button
+                            class="trip-action primary"
+                            onclick="alert('Your itinerary has been saved! ✨')">
+
+                            ✓ Save
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>
