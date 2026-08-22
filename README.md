@@ -1,2 +1,1 @@
-# Globle-Trotter-JDRA
-Hackathon project which depicts travel iternary
+npx neonctl@latest init
