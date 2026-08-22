@@ -5,162 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GlobeTrotter | Explore</title>
 
+  <!-- Assuming your base styles (sidebar, topbar, fade-down) are in style.css -->
+  <link rel="stylesheet" href="css/style.css">
+
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+    /* =========================================
+       EXPLORE PAGE SPECIFIC STYLES
+       (Add these to your style.css or keep here)
+    ========================================= */
 
-    body {
-      background: #f6f5f4;
-      color: #393636;
-    }
-
-    .app {
-      min-height: 100vh;
-      display: flex;
-    }
-
-    /* Sidebar */
-    .sidebar {
-      width: 280px;
-      min-height: 100vh;
-      position: fixed;
-      display: flex;
-      flex-direction: column;
-      padding: 52px 24px 32px;
-      background: #696465;
-      color: white;
-    }
-
-    .logo h1 {
-      font-size: 34px;
-      letter-spacing: -2px;
-    }
-
-    .logo p {
-      margin-top: 10px;
-      color: #ded9d9;
-      font-size: 13px;
-    }
-
-    .menu {
-      margin-top: 58px;
-      list-style: none;
-    }
-
-    .menu li {
-      margin-bottom: 17px;
-    }
-
-    .menu a {
-      display: block;
-      padding: 20px 28px;
-      border-radius: 18px;
-      color: #eee;
-      text-decoration: none;
-      font-size: 18px;
-      transition: 0.25s;
-    }
-
-    .menu a:hover,
-    .menu a.active {
-      background: #f1ece8;
-      color: #333;
-      font-weight: bold;
-    }
-
-    .profile {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-top: auto;
-      padding: 20px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .avatar {
-      width: 58px;
-      height: 58px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: #efcc9c;
-      color: #3c3a3a;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .profile strong {
-      display: block;
-      font-size: 16px;
-    }
-
-    .profile span {
-      display: block;
-      margin-top: 5px;
-      color: #ddd;
-      font-size: 14px;
-    }
-
-    /* Main */
-    .main-content {
-      width: calc(100% - 280px);
-      margin-left: 280px;
-      padding: 64px 74px;
-    }
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .topbar h2 {
-      font-size: 46px;
-      letter-spacing: -2px;
-    }
-
-    .topbar p {
-      margin-top: 10px;
-      color: #857e7d;
-      font-size: 19px;
-    }
-
-    .icon-buttons {
-      display: flex;
-      gap: 16px;
-    }
-
-    .icon-btn {
-      width: 64px;
-      height: 64px;
-      display: grid;
-      place-items: center;
-      border: 0;
-      border-radius: 20px;
-      background: white;
-      cursor: pointer;
-      font-size: 25px;
-      box-shadow: 0 8px 20px rgba(50, 40, 40, 0.05);
-    }
-
-    /* Hero */
+    /* --- Explore Hero --- */
     .explore-hero {
       position: relative;
       overflow: hidden;
-      margin-top: 52px;
-      padding: 48px 52px;
-      border-radius: 34px;
+      border-radius: 24px;
+      padding: 48px 45px;
       color: white;
       background:
-        linear-gradient(90deg, rgba(44, 47, 46, 0.76), rgba(44, 47, 46, 0.18)),
+        linear-gradient(90deg, rgba(63, 59, 59, 0.85), rgba(63, 59, 59, 0.3)),
         url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=85")
         center/cover;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
     }
 
     .explore-hero::after {
@@ -180,24 +45,29 @@
     }
 
     .explore-hero span {
-      font-size: 15px;
+      font-size: 13px;
       letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: var(--peach);
     }
 
     .explore-hero h1 {
       max-width: 610px;
       margin: 16px 0;
-      font-size: 48px;
-      line-height: 1.05;
+      font-size: 42px;
+      line-height: 1.1;
+      letter-spacing: -1px;
     }
 
     .explore-hero p {
       max-width: 560px;
-      color: #f5f5f5;
-      font-size: 18px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 15px;
       line-height: 1.6;
     }
 
+    /* --- Search Box --- */
     .search-box {
       display: flex;
       align-items: center;
@@ -205,47 +75,61 @@
       max-width: 620px;
       margin-top: 28px;
       padding: 8px 8px 8px 20px;
-      border-radius: 15px;
-      background: white;
+      border-radius: 16px;
+      background: var(--card);
     }
 
     .search-box input {
       flex: 1;
       border: 0;
       outline: 0;
-      color: #333;
+      color: var(--dark);
       font-size: 15px;
+      font-family: inherit;
     }
 
     .search-box button {
       border: 0;
-      padding: 14px 22px;
-      border-radius: 11px;
-      background: #aa9476;
+      padding: 14px 26px;
+      border-radius: 12px;
+      background: var(--taupe);
       color: white;
       cursor: pointer;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bold;
+      transition: background 0.2s;
     }
 
-    /* Categories */
+    .search-box button:hover {
+      background: var(--primary);
+    }
+
+    /* --- Sections & Headings --- */
     .section-heading {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin: 48px 0 20px;
+      margin: 40px 0 20px;
     }
 
     .section-heading h3 {
-      font-size: 29px;
+      font-size: 22px;
+      letter-spacing: -0.5px;
     }
 
     .section-heading a {
-      color: #655d5c;
+      color: var(--primary);
       font-weight: bold;
+      font-size: 13px;
       text-decoration: none;
+      transition: 0.2s;
     }
 
+    .section-heading a:hover {
+      color: var(--dark);
+    }
+
+    /* --- Categories --- */
     .categories {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -255,49 +139,51 @@
     .category {
       padding: 21px;
       border: 0;
-      border-radius: 20px;
-      background: white;
-      color: #444;
+      border-radius: var(--radius);
+      background: var(--card);
+      color: var(--dark);
       text-align: left;
       cursor: pointer;
-      box-shadow: 0 7px 20px rgba(50, 40, 40, 0.04);
-      transition: 0.25s;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+      transition: transform 0.25s, background 0.25s;
     }
 
-    .category:hover,
-    .category.active {
+    .category:hover {
       transform: translateY(-4px);
-      background: #aa9476;
+    }
+
+    .category.active {
+      background: var(--primary);
       color: white;
     }
 
     .category .emoji {
       display: block;
       margin-bottom: 12px;
-      font-size: 29px;
+      font-size: 26px;
     }
 
     .category strong {
-      font-size: 16px;
+      font-size: 15px;
     }
 
-    /* Destination cards */
+    /* --- Destination Cards --- */
     .destinations {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 26px;
+      gap: 22px;
     }
 
     .destination-card {
       overflow: hidden;
-      border-radius: 24px;
-      background: white;
-      box-shadow: 0 10px 25px rgba(55, 45, 45, 0.07);
-      transition: 0.3s;
+      border-radius: 20px;
+      background: var(--card);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+      transition: transform 0.3s;
     }
 
     .destination-card:hover {
-      transform: translateY(-7px);
+      transform: translateY(-6px);
     }
 
     .destination-image {
@@ -319,29 +205,29 @@
     }
 
     .card-content h4 {
-      font-size: 21px;
+      font-size: 19px;
     }
 
     .rating {
-      padding: 7px 9px;
-      border-radius: 10px;
-      background: #fbf1df;
-      color: #966f31;
-      font-size: 13px;
+      padding: 6px 9px;
+      border-radius: 8px;
+      background: var(--pearl);
+      color: var(--dark);
+      font-size: 12px;
       font-weight: bold;
     }
 
     .location {
-      margin: 9px 0 15px;
-      color: #898383;
-      font-size: 14px;
+      margin: 6px 0 16px;
+      color: var(--muted);
+      font-size: 13px;
     }
 
     .card-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: #aa9476;
+      color: var(--taupe);
       font-size: 14px;
       font-weight: bold;
     }
@@ -349,109 +235,80 @@
     .save-btn {
       border: 0;
       border-radius: 10px;
-      padding: 9px 11px;
-      background: #f3f0ed;
+      padding: 8px 12px;
+      background: var(--white);
+      color: var(--muted);
       cursor: pointer;
       font-size: 16px;
+      transition: 0.2s;
+    }
+    
+    .save-btn:hover {
+      background: var(--pearl);
+      color: var(--dark);
     }
 
+    /* --- Responsive Adjustments --- */
     @media (max-width: 1100px) {
-      .sidebar {
-        width: 220px;
-      }
-
-      .main-content {
-        width: calc(100% - 220px);
-        margin-left: 220px;
-        padding: 45px 35px;
-      }
-
-      .destinations {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .categories {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .destinations { grid-template-columns: repeat(2, 1fr); }
+      .categories { grid-template-columns: repeat(2, 1fr); }
     }
 
-    @media (max-width: 720px) {
-      .sidebar {
-        display: none;
-      }
-
-      .main-content {
-        width: 100%;
-        margin-left: 0;
-        padding: 30px 20px;
-      }
-
-      .topbar h2 {
-        font-size: 34px;
-      }
-
-      .explore-hero {
-        padding: 35px 26px;
-      }
-
-      .explore-hero h1 {
-        font-size: 36px;
-      }
-
-      .destinations,
-      .categories {
-        grid-template-columns: 1fr;
-      }
-
-      .icon-buttons {
-        display: none;
-      }
+    @media (max-width: 700px) {
+      .explore-hero { padding: 32px 24px; }
+      .explore-hero h1 { font-size: 32px; }
+      .destinations, .categories { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body>
   <div class="app">
-    <aside class="sidebar">
-      <div class="logo">
-        <h1>GlobeTrotter</h1>
-        <p>PLAN • EXPLORE • EXPERIENCE</p>
-      </div>
-
-      <nav>
-        <ul class="menu">
-          <li><a href="dashboard.html">🏠 &nbsp; Dashboard</a></li>
-          <li><a href="trips.html">🧳 &nbsp; My Trips</a></li>
-          <li><a class="active" href="explore.html">🗺️ &nbsp; Explore</a></li>
-          <li><a href="calendar.html">🗓️ &nbsp; Calendar</a></li>
-          <li><a href="budget.html">💰 &nbsp; Budget</a></li>
-          <li><a href="settings.html">⚙️ &nbsp; Settings</a></li>
-        </ul>
-      </nav>
-
-      <div class="profile">
-        <div class="avatar">YG</div>
-        <div>
-          <strong>Guest User</strong>
-          <span>Pro Traveler</span>
+    
+    <!-- Sidebar (Updated to identical standard) -->
+    <aside class="sidebar fade-down" style="--delay: 0s;">
+        <div class="logo">
+            <h1>✈ Globe<span>Trotter</span></h1>
+            <p>PLAN • EXPLORE • EXPERIENCE</p>
         </div>
-      </div>
+
+        <nav class="nav">
+            <a href="dashboard.html" class="nav-item"><span>⌂</span> Dashboard</a>
+            <a href="create-trip.html" class="nav-item"><span>＋</span> Create Trip</a>
+            <a href="trips.html" class="nav-item"><span>🧳</span> My Trips</a>
+            <a href="explore.html" class="nav-item active"><span>🗺️</span> Explore</a>
+            <a href="budget.html" class="nav-item"><span>💰</span> Budget</a>
+            <a href="settings.html" class="nav-item"><span>⚙️</span> Settings</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="profile-mini">
+                <div class="avatar">A</div>
+                <div>
+                    <strong>Arhan</strong>
+                    <small>Traveler</small>
+                </div>
+            </div>
+            <a href="login.html" class="nav-item" style="margin-top: 10px;"><span>↪</span> Logout</a>
+        </div>
     </aside>
 
-    <main class="main-content">
-      <header class="topbar">
-        <div>
-          <h2>Explore the world</h2>
-          <p>Find places that turn your travel dreams into plans.</p>
-        </div>
+    <main class="main">
+      
+      <!-- Topbar (Updated to identical standard) -->
+      <div class="topbar fade-down" style="--delay: 0.1s;">
+          <div class="welcome">
+              <h2>Explore the world</h2>
+              <p>Find places that turn your travel dreams into plans.</p>
+          </div>
+          <div class="top-actions">
+              <button class="icon-btn">🔔</button>
+              <button class="icon-btn">🔍</button>
+          </div>
+      </div>
 
-        <div class="icon-buttons">
-          <button class="icon-btn" aria-label="Notifications">🔔</button>
-          <button class="icon-btn" aria-label="Search">🔍</button>
-        </div>
-      </header>
-
-      <section class="explore-hero">
+      <!-- Hero Section -->
+      <section class="explore-hero fade-down" style="--delay: 0.2s;">
         <span>DISCOVER YOUR NEXT ESCAPE</span>
         <h1>Every journey begins with a little curiosity.</h1>
         <p>Search beautiful destinations, save your favorites, and create an unforgettable itinerary.</p>
@@ -463,10 +320,11 @@
         </div>
       </section>
 
-      <section>
+      <!-- Categories Section -->
+      <section class="fade-down" style="--delay: 0.3s;">
         <div class="section-heading">
           <h3>Explore by interest</h3>
-          <a href="#">View all →</a>
+          <a href="#">View all &rarr;</a>
         </div>
 
         <div class="categories">
@@ -492,13 +350,15 @@
         </div>
       </section>
 
-      <section>
+      <!-- Destinations Section -->
+      <section class="fade-down" style="--delay: 0.4s;">
         <div class="section-heading">
           <h3>Popular destinations</h3>
-          <a href="#">View all →</a>
+          <a href="#">View all &rarr;</a>
         </div>
 
         <div class="destinations">
+          <!-- Card 1 -->
           <article class="destination-card">
             <img
               class="destination-image"
@@ -512,12 +372,13 @@
               </div>
               <p class="location">📍 Indonesia</p>
               <div class="card-footer">
-                <span>From $620</span>
+                <span>From ₹50,000</span>
                 <button class="save-btn" aria-label="Save Bali">♡</button>
               </div>
             </div>
           </article>
 
+          <!-- Card 2 -->
           <article class="destination-card">
             <img
               class="destination-image"
@@ -531,12 +392,13 @@
               </div>
               <p class="location">📍 Greece</p>
               <div class="card-footer">
-                <span>From $790</span>
+                <span>From ₹85,000</span>
                 <button class="save-btn" aria-label="Save Santorini">♡</button>
               </div>
             </div>
           </article>
 
+          <!-- Card 3 -->
           <article class="destination-card">
             <img
               class="destination-image"
@@ -550,19 +412,20 @@
               </div>
               <p class="location">📍 Japan</p>
               <div class="card-footer">
-                <span>From $850</span>
+                <span>From ₹75,000</span>
                 <button class="save-btn" aria-label="Save Tokyo">♡</button>
               </div>
             </div>
           </article>
         </div>
       </section>
+
     </main>
   </div>
 
   <script>
+    // Category Button Toggle Logic
     const categoryButtons = document.querySelectorAll(".category");
-
     categoryButtons.forEach((button) => {
       button.addEventListener("click", () => {
         categoryButtons.forEach((item) => item.classList.remove("active"));
@@ -570,11 +433,16 @@
       });
     });
 
+    // Save/Heart Button Toggle Logic
     const saveButtons = document.querySelectorAll(".save-btn");
-
     saveButtons.forEach((button) => {
       button.addEventListener("click", () => {
         button.textContent = button.textContent === "♡" ? "♥" : "♡";
+        if (button.textContent === "♥") {
+            button.style.color = "var(--peach)"; // Adds a little pop of color when saved
+        } else {
+            button.style.color = "var(--muted)";
+        }
       });
     });
   </script>
