@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        /* =================================================
-           CREATE TRIP PAGE
-        ================================================= */
+
+        /* ==============================
+           CREATE TRIP HEADER
+        ============================== */
 
         .create-header {
             margin-bottom: 28px;
@@ -29,21 +30,24 @@
             font-size: 14px;
         }
 
+
+        /* ==============================
+           FORM CARD
+        ============================== */
+
         .trip-form-card {
             background: white;
             border-radius: 22px;
             padding: 32px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
             max-width: 900px;
         }
+
 
         .form-section {
             margin-bottom: 32px;
         }
 
-        .form-section:last-of-type {
-            margin-bottom: 25px;
-        }
 
         .form-section-title {
             display: flex;
@@ -52,21 +56,32 @@
             margin-bottom: 18px;
         }
 
+
         .form-section-title .number {
             width: 30px;
             height: 30px;
+
             display: grid;
             place-items: center;
+
             border-radius: 50%;
+
             background: var(--pearl);
             color: var(--dark);
+
             font-size: 12px;
             font-weight: bold;
         }
 
+
         .form-section-title h3 {
             font-size: 16px;
         }
+
+
+        /* ==============================
+           GRID
+        ============================== */
 
         .form-grid {
             display: grid;
@@ -74,184 +89,351 @@
             gap: 18px;
         }
 
+
         .form-group {
             display: flex;
             flex-direction: column;
         }
 
+
         .form-group.full {
             grid-column: 1 / -1;
         }
 
+
         .form-group label {
             margin-bottom: 8px;
+
             color: var(--dark);
+
             font-size: 13px;
             font-weight: 700;
         }
 
+
         .form-group input,
         .form-group select,
         .form-group textarea {
+
             width: 100%;
+
             padding: 13px 14px;
-            border: 1px solid var(--border);
+
+            border: 1px solid #ddd;
+
             border-radius: 10px;
+
             outline: none;
-            background: #fff;
+
+            background: white;
+
             color: var(--dark);
+
             font-family: inherit;
             font-size: 14px;
+
             transition: 0.2s;
         }
 
-        .form-group textarea {
-            min-height: 90px;
-            resize: vertical;
-        }
 
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
+
             border-color: var(--taupe);
-            box-shadow: 0 0 0 3px rgba(165, 147, 123, 0.13);
+
+            box-shadow:
+                0 0 0 3px rgba(165,147,123,0.13);
         }
 
-        .input-with-icon {
+
+        /* ==============================
+           DESTINATION CARDS
+        ============================== */
+
+        .city-options {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            gap: 10px;
+        }
+
+
+        .city-option {
             position: relative;
         }
 
-        .input-with-icon span {
+
+        .city-option input {
+
             position: absolute;
-            left: 13px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 16px;
+
+            opacity: 0;
         }
 
-        .input-with-icon input {
-            padding-left: 40px;
+
+        .city-option label {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            min-height: 105px;
+
+            padding: 12px 8px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 14px;
+
+            cursor: pointer;
+
+            text-align: center;
+
+            transition: 0.2s;
         }
 
-        /* Travel style */
+
+        .city-option label .flag {
+            font-size: 27px;
+        }
+
+
+        .city-option label strong {
+            font-size: 12px;
+        }
+
+
+        .city-option label small {
+
+            color: var(--muted);
+
+            font-size: 9px;
+        }
+
+
+        .city-option label:hover {
+
+            transform: translateY(-2px);
+
+            border-color: var(--taupe);
+        }
+
+
+        .city-option input:checked + label {
+
+            background: var(--pearl);
+
+            border-color: var(--taupe);
+
+            box-shadow:
+                0 0 0 1px var(--taupe);
+        }
+
+
+        /* ==============================
+           TRAVEL STYLE
+        ============================== */
 
         .style-options {
+
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
             gap: 10px;
         }
+
 
         .style-option {
             position: relative;
         }
 
+
         .style-option input {
+
             position: absolute;
+
             opacity: 0;
         }
 
+
         .style-option label {
+
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
+
             justify-content: center;
+
             gap: 7px;
+
             min-height: 85px;
-            padding: 12px;
-            border: 1px solid var(--border);
+
+            border: 1px solid #ddd;
+
             border-radius: 13px;
+
             cursor: pointer;
-            text-align: center;
+
             font-size: 11px;
+
             transition: 0.2s;
         }
+
 
         .style-option label span {
             font-size: 23px;
         }
 
+
         .style-option input:checked + label {
-            border-color: var(--taupe);
+
             background: var(--pearl);
-            box-shadow: 0 0 0 1px var(--taupe);
+
+            border-color: var(--taupe);
+
+            box-shadow:
+                0 0 0 1px var(--taupe);
         }
 
-        .style-option label:hover {
-            transform: translateY(-2px);
-        }
 
-        /* Interests */
+        /* ==============================
+           INTERESTS
+        ============================== */
 
         .interest-options {
+
             display: flex;
+
             flex-wrap: wrap;
+
             gap: 9px;
         }
+
 
         .interest-option {
             position: relative;
         }
 
+
         .interest-option input {
+
             position: absolute;
+
             opacity: 0;
         }
 
+
         .interest-option label {
+
             display: block;
+
             padding: 9px 14px;
+
             border-radius: 20px;
-            border: 1px solid var(--border);
+
+            border: 1px solid #ddd;
+
             color: var(--dark);
+
             font-size: 12px;
+
             cursor: pointer;
+
             transition: 0.2s;
         }
 
+
         .interest-option input:checked + label {
+
             background: var(--seafoam);
+
             border-color: var(--seafoam);
         }
 
-        .interest-option label:hover {
-            background: var(--pearl);
-        }
 
-        /* Bottom */
+        /* ==============================
+           BOTTOM
+        ============================== */
 
         .form-bottom {
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
+
             gap: 20px;
+
             padding-top: 22px;
-            border-top: 1px solid var(--border);
+
+            border-top: 1px solid #eee;
         }
 
+
         .form-note {
+
             color: var(--muted);
+
             font-size: 11px;
         }
 
+
         .create-trip-btn {
+
             padding: 13px 22px;
+
             border-radius: 10px;
+
             background: var(--primary);
+
             color: white;
-            font-weight: 700;
+
+            font-weight: bold;
+
             font-size: 14px;
+
             transition: 0.2s;
         }
 
+
         .create-trip-btn:hover {
+
             background: var(--dark);
+
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(63, 59, 59, 0.15);
         }
 
-        /* Responsive */
 
-        @media (max-width: 800px) {
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+
+        @media (max-width: 900px) {
+
+            .city-options {
+
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+        }
+
+
+        @media (max-width: 700px) {
 
             .trip-form-card {
                 padding: 22px;
@@ -265,19 +447,30 @@
                 grid-column: auto;
             }
 
+            .city-options {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
             .style-options {
-                grid-template-columns: 1fr 1fr;
+
+                grid-template-columns:
+                    1fr 1fr;
             }
 
             .form-bottom {
+
                 flex-direction: column;
+
                 align-items: stretch;
             }
 
             .create-trip-btn {
-                text-align: center;
+                width: 100%;
             }
         }
+
     </style>
 
 </head>
@@ -287,9 +480,10 @@
 
 <div class="app">
 
-    <!-- =================================================
+
+    <!-- ==============================
          SIDEBAR
-    ================================================== -->
+    ============================== -->
 
     <aside class="sidebar">
 
@@ -309,28 +503,50 @@
         <nav class="nav">
 
             <a href="dashboard.html" class="nav-item">
+
                 <span>⌂</span>
+
                 Dashboard
+
             </a>
+
 
             <a href="my-trips.html" class="nav-item">
+
                 <span>🧳</span>
+
                 My Trips
+
             </a>
 
-            <a href="create-trip.html" class="nav-item active">
+
+            <a href="create-trip.html"
+               class="nav-item active">
+
                 <span>＋</span>
+
                 Create Trip
+
             </a>
 
-            <a href="calendar.html" class="nav-item">
+
+            <a href="calendar.html"
+               class="nav-item">
+
                 <span>▣</span>
+
                 Calendar
+
             </a>
 
-            <a href="profile.html" class="nav-item">
+
+            <a href="profile.html"
+               class="nav-item">
+
                 <span>◎</span>
+
                 Profile
+
             </a>
 
         </nav>
@@ -346,7 +562,9 @@
 
                 <div>
 
-                    <strong>Arhan</strong>
+                    <strong>
+                        Arhan
+                    </strong>
 
                     <small>
                         Traveler
@@ -357,9 +575,11 @@
             </div>
 
 
-            <a href="login.html" class="nav-item">
+            <a href="login.html"
+               class="nav-item">
 
                 <span>↪</span>
+
                 Logout
 
             </a>
@@ -370,9 +590,9 @@
 
 
 
-    <!-- =================================================
+    <!-- ==============================
          MAIN
-    ================================================== -->
+    ============================== -->
 
     <main class="main">
 
@@ -384,23 +604,23 @@
             </h2>
 
             <p>
-                Tell us a little about your plans. We'll take it from here.
+                Tell us what you're looking for and
+                we'll build a trip around you.
             </p>
 
         </div>
 
 
 
-        <!-- =================================================
-             FORM
-        ================================================== -->
-
         <div class="trip-form-card">
+
 
             <form id="tripForm">
 
 
-                <!-- DESTINATION -->
+                <!-- ==============================
+                     DESTINATION
+                ============================== -->
 
                 <section class="form-section">
 
@@ -411,32 +631,166 @@
                         </div>
 
                         <h3>
-                            Where are you going?
+                            Where do you want to go?
                         </h3>
 
                     </div>
 
 
-                    <div class="form-grid">
+                    <div class="city-options">
 
-                        <div class="form-group full">
 
-                            <label for="destination">
-                                Destination
+                        <!-- TOKYO -->
+
+                        <div class="city-option">
+
+                            <input
+                                type="radio"
+                                name="destination"
+                                id="tokyo"
+                                value="tokyo"
+                                required
+                            >
+
+                            <label for="tokyo">
+
+                                <span class="flag">
+                                    🇯🇵
+                                </span>
+
+                                <strong>
+                                    Tokyo
+                                </strong>
+
+                                <small>
+                                    Japan
+                                </small>
+
                             </label>
 
-                            <div class="input-with-icon">
+                        </div>
 
-                                <span>📍</span>
 
-                                <input
-                                    type="text"
-                                    id="destination"
-                                    placeholder="e.g. Tokyo, Japan"
-                                    required
-                                >
 
-                            </div>
+                        <!-- PARIS -->
+
+                        <div class="city-option">
+
+                            <input
+                                type="radio"
+                                name="destination"
+                                id="paris"
+                                value="paris"
+                            >
+
+                            <label for="paris">
+
+                                <span class="flag">
+                                    🇫🇷
+                                </span>
+
+                                <strong>
+                                    Paris
+                                </strong>
+
+                                <small>
+                                    France
+                                </small>
+
+                            </label>
+
+                        </div>
+
+
+
+                        <!-- ROME -->
+
+                        <div class="city-option">
+
+                            <input
+                                type="radio"
+                                name="destination"
+                                id="rome"
+                                value="rome"
+                            >
+
+                            <label for="rome">
+
+                                <span class="flag">
+                                    🇮🇹
+                                </span>
+
+                                <strong>
+                                    Rome
+                                </strong>
+
+                                <small>
+                                    Italy
+                                </small>
+
+                            </label>
+
+                        </div>
+
+
+
+                        <!-- DUBAI -->
+
+                        <div class="city-option">
+
+                            <input
+                                type="radio"
+                                name="destination"
+                                id="dubai"
+                                value="dubai"
+                            >
+
+                            <label for="dubai">
+
+                                <span class="flag">
+                                    🇦🇪
+                                </span>
+
+                                <strong>
+                                    Dubai
+                                </strong>
+
+                                <small>
+                                    UAE
+                                </small>
+
+                            </label>
+
+                        </div>
+
+
+
+                        <!-- NEW YORK -->
+
+                        <div class="city-option">
+
+                            <input
+                                type="radio"
+                                name="destination"
+                                id="newyork"
+                                value="newyork"
+                            >
+
+                            <label for="newyork">
+
+                                <span class="flag">
+                                    🇺🇸
+                                </span>
+
+                                <strong>
+                                    New York
+                                </strong>
+
+                                <small>
+                                    USA
+                                </small>
+
+                            </label>
 
                         </div>
 
@@ -446,7 +800,9 @@
 
 
 
-                <!-- DATES -->
+                <!-- ==============================
+                     DATES
+                ============================== -->
 
                 <section class="form-section">
 
@@ -464,6 +820,7 @@
 
 
                     <div class="form-grid">
+
 
                         <div class="form-group">
 
@@ -500,7 +857,9 @@
 
 
 
-                <!-- TRAVEL DETAILS -->
+                <!-- ==============================
+                     TRIP DETAILS
+                ============================== -->
 
                 <section class="form-section">
 
@@ -519,31 +878,32 @@
 
                     <div class="form-grid">
 
+
                         <div class="form-group">
 
                             <label for="travelers">
-                                Number of travelers
+                                Travelers
                             </label>
 
                             <select id="travelers">
 
-                                <option value="1">
+                                <option>
                                     1 traveler
                                 </option>
 
-                                <option value="2">
+                                <option>
                                     2 travelers
                                 </option>
 
-                                <option value="3">
+                                <option>
                                     3 travelers
                                 </option>
 
-                                <option value="4">
+                                <option>
                                     4 travelers
                                 </option>
 
-                                <option value="5">
+                                <option>
                                     5+ travelers
                                 </option>
 
@@ -590,7 +950,9 @@
 
 
 
-                <!-- TRAVEL STYLE -->
+                <!-- ==============================
+                     TRAVEL STYLE
+                ============================== -->
 
                 <section class="form-section">
 
@@ -616,7 +978,6 @@
                                 type="radio"
                                 id="relaxed"
                                 name="style"
-                                value="relaxed"
                                 checked
                             >
 
@@ -637,7 +998,6 @@
                                 type="radio"
                                 id="adventure"
                                 name="style"
-                                value="adventure"
                             >
 
                             <label for="adventure">
@@ -657,7 +1017,6 @@
                                 type="radio"
                                 id="culture"
                                 name="style"
-                                value="culture"
                             >
 
                             <label for="culture">
@@ -677,7 +1036,6 @@
                                 type="radio"
                                 id="luxury"
                                 name="style"
-                                value="luxury"
                             >
 
                             <label for="luxury">
@@ -696,7 +1054,9 @@
 
 
 
-                <!-- INTERESTS -->
+                <!-- ==============================
+                     INTERESTS
+                ============================== -->
 
                 <section class="form-section">
 
@@ -721,7 +1081,6 @@
                             <input
                                 type="checkbox"
                                 id="food"
-                                value="food"
                             >
 
                             <label for="food">
@@ -736,7 +1095,6 @@
                             <input
                                 type="checkbox"
                                 id="history"
-                                value="history"
                             >
 
                             <label for="history">
@@ -751,7 +1109,6 @@
                             <input
                                 type="checkbox"
                                 id="nature"
-                                value="nature"
                             >
 
                             <label for="nature">
@@ -766,7 +1123,6 @@
                             <input
                                 type="checkbox"
                                 id="shopping"
-                                value="shopping"
                             >
 
                             <label for="shopping">
@@ -781,7 +1137,6 @@
                             <input
                                 type="checkbox"
                                 id="nightlife"
-                                value="nightlife"
                             >
 
                             <label for="nightlife">
@@ -796,7 +1151,6 @@
                             <input
                                 type="checkbox"
                                 id="photography"
-                                value="photography"
                             >
 
                             <label for="photography">
@@ -811,7 +1165,6 @@
                             <input
                                 type="checkbox"
                                 id="beaches"
-                                value="beaches"
                             >
 
                             <label for="beaches">
@@ -826,7 +1179,6 @@
                             <input
                                 type="checkbox"
                                 id="art"
-                                value="art"
                             >
 
                             <label for="art">
@@ -841,7 +1193,9 @@
 
 
 
-                <!-- NOTES -->
+                <!-- ==============================
+                     NOTES
+                ============================== -->
 
                 <section class="form-section">
 
@@ -866,7 +1220,7 @@
 
                         <textarea
                             id="notes"
-                            placeholder="Maybe there's a restaurant you've always wanted to try, or a place you absolutely don't want to miss..."
+                            placeholder="Tell us anything that would make this trip feel more like yours..."
                         ></textarea>
 
                     </div>
@@ -875,12 +1229,17 @@
 
 
 
-                <!-- SUBMIT -->
+                <!-- ==============================
+                     SUBMIT
+                ============================== -->
 
                 <div class="form-bottom">
 
                     <span class="form-note">
-                        ✦ You can change these details later.
+
+                        ✦ Your itinerary will be
+                        personalized for you.
+
                     </span>
 
 
@@ -888,11 +1247,12 @@
                         type="submit"
                         class="create-trip-btn">
 
-                        Create My Trip →
+                        ✨ Generate My Trip →
 
                     </button>
 
                 </div>
+
 
             </form>
 
@@ -907,55 +1267,114 @@
 <script>
 
 document
-    .getElementById("tripForm")
-    .addEventListener("submit", function(event) {
+.getElementById("tripForm")
+.addEventListener("submit", function(event) {
 
-        event.preventDefault();
-
-        const destination =
-            document.getElementById("destination").value;
-
-        const startDate =
-            document.getElementById("startDate").value;
-
-        const endDate =
-            document.getElementById("endDate").value;
+    event.preventDefault();
 
 
-        if (!destination || !startDate || !endDate) {
+    /* Get selected city */
 
-            alert("Looks like we're missing a few details.");
-
-            return;
-
-        }
-
-
-        if (new Date(endDate) < new Date(startDate)) {
-
-            alert("Your return date can't be before your departure date.");
-
-            return;
-
-        }
-
-
-        /*
-         * Temporary frontend behaviour.
-         * Later this button can send the data to the backend
-         * and generate the itinerary.
-         */
-
-        alert(
-            "Trip created! 🌍\n\n" +
-            "Destination: " + destination
+    const selectedCity =
+        document.querySelector(
+            'input[name="destination"]:checked'
         );
 
 
-        // Later:
-        // window.location.href = "trip-details.html";
+    if (!selectedCity) {
 
-    });
+        alert(
+            "Choose a destination first 🌍"
+        );
+
+        return;
+    }
+
+
+    /* Get dates */
+
+    const startDate =
+        document.getElementById(
+            "startDate"
+        ).value;
+
+
+    const endDate =
+        document.getElementById(
+            "endDate"
+        ).value;
+
+
+    if (
+        new Date(endDate)
+        <
+        new Date(startDate)
+    ) {
+
+        alert(
+            "Your end date can't be before your start date."
+        );
+
+        return;
+    }
+
+
+    /*
+       Decide which itinerary
+       page to open.
+    */
+
+    const city =
+        selectedCity.value;
+
+
+    const cityPages = {
+
+        tokyo:
+            "tokyo.html",
+
+        paris:
+            "paris.html",
+
+        rome:
+            "rome.html",
+
+        dubai:
+            "dubai.html",
+
+        newyork:
+            "newyork.html"
+
+    };
+
+
+    /*
+       Save some information
+       for later use.
+    */
+
+    localStorage.setItem(
+        "tripCity",
+        city
+    );
+
+    localStorage.setItem(
+        "tripStart",
+        startDate
+    );
+
+    localStorage.setItem(
+        "tripEnd",
+        endDate
+    );
+
+
+    /* Open city itinerary */
+
+    window.location.href =
+        cityPages[city];
+
+});
 
 </script>
 
