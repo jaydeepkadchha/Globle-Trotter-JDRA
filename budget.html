@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GlobeTrotter | Budget</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f6f5f4;
+      color: #3d3939;
+    }
+
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 280px;
+      min-height: 100vh;
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      padding: 52px 24px 32px;
+      background: #696465;
+      color: white;
+    }
+
+    .logo h1 {
+      font-size: 34px;
+      letter-spacing: -2px;
+    }
+
+    .logo p {
+      margin-top: 10px;
+      color: #ded9d9;
+      font-size: 13px;
+    }
+
+    .menu {
+      margin-top: 58px;
+      list-style: none;
+    }
+
+    .menu li {
+      margin-bottom: 17px;
+    }
+
+    .menu a {
+      display: block;
+      padding: 20px 28px;
+      border-radius: 18px;
+      color: #eee;
+      text-decoration: none;
+      font-size: 18px;
+      transition: 0.25s;
+    }
+
+    .menu a:hover,
+    .menu a.active {
+      background: #f1ece8;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: auto;
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      text-decoration: none;
+      transition: 0.25s;
+    }
+
+    .profile:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .avatar {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #efcc9c;
+      color: #3c3a3a;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .profile strong,
+    .profile span {
+      display: block;
+    }
+
+    .profile span {
+      margin-top: 5px;
+      color: #ddd;
+      font-size: 14px;
+    }
+
+    .main-content {
+      width: calc(100% - 280px);
+      margin-left: 280px;
+      padding: 58px 65px;
+    }
+
+    .topbar,
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .topbar h1 {
+      font-size: 42px;
+      letter-spacing: -1px;
+    }
+
+    .topbar p {
+      margin-top: 10px;
+      color: #857e7d;
+      font-size: 17px;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .icon-btn {
+      width: 58px;
+      height: 58px;
+      border: 0;
+      border-radius: 18px;
+      background: white;
+      cursor: pointer;
+      font-size: 21px;
+      box-shadow: 0 8px 20px rgba(50, 40, 40, 0.05);
+    }
+
+    .card {
+      border-radius: 25px;
+      background: white;
+      box-shadow: 0 10px 28px rgba(50, 40, 40, 0.06);
+    }
+
+    .budget-summary {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 22px;
+      margin-top: 42px;
+    }
+
+    .main-budget-card {
+      position: relative;
+      overflow: hidden;
+      padding: 32px;
+      color: white;
+      background: #aa9476;
+    }
+
+    .main-budget-card::after {
+      content: "";
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      right: -85px;
+      top: -100px;
+      border: 30px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    .main-budget-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .main-budget-card > span {
+      font-size: 13px;
+      letter-spacing: 1.5px;
+    }
+
+    .main-budget-card h2 {
+      margin: 14px 0 7px;
+      font-size: 39px;
+    }
+
+    .main-budget-card p {
+      color: #fff4e7;
+      font-size: 14px;
+    }
+
+    .budget-progress {
+      height: 8px;
+      margin-top: 25px;
+      overflow: hidden;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .budget-progress div {
+      width: 64%;
+      height: 100%;
+      border-radius: 10px;
+      background: white;
+    }
+
+    .mini-card {
+      padding: 28px;
+    }
+
+    .mini-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border-radius: 14px;
+      background: #f4efeb;
+      font-size: 23px;
+    }
+
+    .mini-card p {
+      color: #8b8380;
+      font-size: 14px;
+    }
+
+    .mini-card h3 {
+      margin-top: 9px;
+      font-size: 28px;
+    }
+
+    .mini-card small {
+      display: block;
+      margin-top: 7px;
+      color: #6c9873;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .section-heading {
+      margin: 45px 0 20px;
+    }
+
+    .section-heading h2 {
+      font-size: 28px;
+    }
+
+    .add-expense-btn,
+    .save-btn {
+      padding: 13px 19px;
+      border: 0;
+      border-radius: 12px;
+      background: #aa9476;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .add-expense-btn:hover,
+    .save-btn:hover {
+      background: #907858;
+    }
+
+    .budget-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 25px;
+    }
+
+    .categories-card,
+    .trip-budget-card {
+      padding: 28px;
+    }
+
+    .category {
+      margin-bottom: 23px;
+    }
+
+    .category:last-child {
+      margin-bottom: 0;
+    }
+
+    .category-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .category-name {
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .category-value {
+      color: #7d7572;
+      font-size: 13px;
+    }
+
+    .category-bar {
+      height: 9px;
+      overflow: hidden;
+      border-radius: 10px;
+      background: #eeeae8;
+    }
+
+    .category-bar span {
+      display: block;
+      height: 100%;
+      border-radius: 10px;
+    }
+
+    .transport { background: #aa9476; }
+    .stay { background: #5d9b94; }
+    .food { background: #d79c53; }
+    .activities { background: #907baa; }
+    .shopping { background: #d77c86; }
+
+    .trip-budget-card h3 {
+      font-size: 21px;
+    }
+
+    .trip-budget-card > p {
+      margin-top: 8px;
+      color: #8b8380;
+      font-size: 13px;
+    }
+
+    .donut-wrap {
+      display: grid;
+      min-height: 235px;
+      place-items: center;
+    }
+
+    .donut {
+      width: 175px;
+      height: 175px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: conic-gradient(
+        #aa9476 0deg 135deg,
+        #5d9b94 135deg 225deg,
+        #d79c53 225deg 290deg,
+        #907baa 290deg 335deg,
+        #d77c86 335deg 360deg
+      );
+    }
+
+    .donut-center {
+      width: 125px;
+      height: 125px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: white;
+      text-align: center;
+    }
+
+    .donut-center strong {
+      display: block;
+      font-size: 22px;
+    }
+
+    .donut-center span {
+      color: #8b8380;
+      font-size: 11px;
+    }
+
+    .trip-budget-footer {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 17px;
+      border-top: 1px solid #ece7e4;
+      color: #766e6b;
+      font-size: 13px;
+    }
+
+    .expenses-card {
+      padding: 12px 28px;
+    }
+
+    .expense {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 17px 0;
+      border-bottom: 1px solid #eee9e6;
+    }
+
+    .expense:last-child {
+      border-bottom: 0;
+    }
+
+    .expense-icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: #f4efeb;
+      font-size: 20px;
+    }
+
+    .expense-info {
+      flex: 1;
+    }
+
+    .expense-info strong {
+      display: block;
+      font-size: 15px;
+    }
+
+    .expense-info span {
+      display: block;
+      margin-top: 5px;
+      color: #8b8380;
+      font-size: 12px;
+    }
+
+    .expense-price {
+      color: #4f4947;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(48, 42, 40, 0.45);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-backdrop.show {
+      display: flex;
+    }
+
+    .modal {
+      width: min(430px, 100%);
+      padding: 28px;
+      border-radius: 23px;
+      background: white;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    .modal-header h3 {
+      font-size: 22px;
+    }
+
+    .close-btn {
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 10px;
+      background: #f3efec;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .expense-form {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .expense-form input,
+    .expense-form select {
+      padding: 13px;
+      border: 1px solid #e4ded9;
+      border-radius: 11px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .expense-form input:focus,
+    .expense-form select:focus {
+      border-color: #aa9476;
+    }
+
+    @media (max-width: 1150px) {
+      .budget-summary {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .main-budget-card {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 950px) {
+      .sidebar {
+        display: none;
+      }
+
+      .main-content {
+        width: 100%;
+        margin-left: 0;
+        padding: 35px 20px;
+      }
+
+      .budget-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .top-actions {
+        display: none;
+      }
+
+      .topbar h1 {
+        font-size: 34px;
+      }
+
+      .budget-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .main-budget-card {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo">
+        <h1>GlobeTrotter</h1>
+        <p>PLAN • EXPLORE • EXPERIENCE</p>
+      </div>
+
+      <ul class="menu">
+        <li><a href="dashboard.html">🏠 &nbsp; Dashboard</a></li>
+        <li><a href="trips.html">🧳 &nbsp; My Trips</a></li>
+        <li><a href="explore.html">🗺️ &nbsp; Explore</a></li>
+        <li><a href="calendar.html">🗓️ &nbsp; Calendar</a></li>
+        <li><a class="active" href="budget.html">💰 &nbsp; Budget</a></li>
+        <li><a href="settings.html">⚙️ &nbsp; Settings</a></li>
+      </ul>
+
+      <a href="profile.html" class="profile">
+        <div class="avatar" id="userInitials">YG</div>
+        <div>
+          <strong id="userName">Guest User</strong>
+          <span>Pro Traveler</span>
+        </div>
+      </a>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <h1>Travel Budget</h1>
+          <p>Track your spending and stay ready for every adventure.</p>
+        </div>
+
+        <div class="top-actions">
+          <button class="icon-btn">🔔</button>
+          <button class="icon-btn">🔍</button>
+        </div>
+      </header>
+
+      <section class="budget-summary">
+        <article class="main-budget-card card">
+          <span>TOTAL TRAVEL BUDGET</span>
+          <h2 id="totalBudget">₹3,50,000</h2>
+          <p><span id="spentAmount">₹2,24,000</span> spent of your planned budget</p>
+
+          <div class="budget-progress">
+            <div id="budgetProgress"></div>
+          </div>
+        </article>
+
+        <article class="mini-card card">
+          <div class="mini-icon">💳</div>
+          <p>Remaining Budget</p>
+          <h3 id="remainingBudget">₹1,26,000</h3>
+          <small>✓ You are on track</small>
+        </article>
+
+        <article class="mini-card card">
+          <div class="mini-icon">📅</div>
+          <p>Daily Average Spend</p>
+          <h3 id="dailySpend">₹18,700</h3>
+          <small>Based on this trip</small>
+        </article>
+      </section>
+
+      <div class="section-heading">
+        <h2>Spending Overview</h2>
+        <button class="add-expense-btn" onclick="openModal()">+ Add Expense</button>
+      </div>
+
+      <section class="budget-layout">
+        <article class="categories-card card">
+          <div class="category">
+            <div class="category-top">
+              <div class="category-name">✈️ Transportation</div>
+              <div class="category-value">₹82,000 / ₹1,10,000</div>
+            </div>
+            <div class="category-bar"><span class="transport" style="width: 75%"></span></div>
+          </div>
+
+          <div class="category">
+            <div class="category-top">
+              <div class="category-name">🏨 Accommodation</div>
+              <div class="category-value">₹67,000 / ₹90,000</div>
+            </div>
+            <div class="category-bar"><span class="stay" style="width: 74%"></span></div>
+          </div>
+
+          <div class="category">
+            <div class="category-top">
+              <div class="category-name">🍽️ Food & Drinks</div>
+              <div class="category-value">₹39,000 / ₹60,000</div>
+            </div>
+            <div class="category-bar"><span class="food" style="width: 65%"></span></div>
+          </div>
+
+          <div class="category">
+            <div class="category-top">
+              <div class="category-name">🎟️ Activities</div>
+              <div class="category-value">₹26,000 / ₹50,000</div>
+            </div>
+            <div class="category-bar"><span class="activities" style="width: 52%"></span></div>
+          </div>
+
+          <div class="category">
+            <div class="category-top">
+              <div class="category-name">🛍️ Shopping</div>
+              <div class="category-value">₹10,000 / ₹40,000</div>
+            </div>
+            <div class="category-bar"><span class="shopping" style="width: 25%"></span></div>
+          </div>
+        </article>
+
+        <article class="trip-budget-card card">
+          <h3>Budget by Category</h3>
+          <p>Your spending distribution for this trip.</p>
+
+          <div class="donut-wrap">
+            <div class="donut">
+              <div class="donut-center">
+                <div>
+                  <strong id="donutAmount">₹2,24,000</strong>
+                  <span>Total spent</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="trip-budget-footer">
+            <span>Budget: ₹3,50,000</span>
+            <strong id="usagePercent">64% Used</strong>
+          </div>
+        </article>
+      </section>
+
+      <div class="section-heading">
+        <h2>Recent Expenses</h2>
+      </div>
+
+      <section class="expenses-card card" id="expenseList">
+        <article class="expense">
+          <div class="expense-icon">✈️</div>
+          <div class="expense-info">
+            <strong>Flight tickets</strong>
+            <span>Transportation • Today</span>
+          </div>
+          <div class="expense-price">₹52,000</div>
+        </article>
+
+        <article class="expense">
+          <div class="expense-icon">🏨</div>
+          <div class="expense-info">
+            <strong>Hotel booking</strong>
+            <span>Accommodation • Yesterday</span>
+          </div>
+          <div class="expense-price">₹32,000</div>
+        </article>
+
+        <article class="expense">
+          <div class="expense-icon">🍽️</div>
+          <div class="expense-info">
+            <strong>Restaurant dinner</strong>
+            <span>Food & Drinks • 2 days ago</span>
+          </div>
+          <div class="expense-price">₹4,800</div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="expenseModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add New Expense</h3>
+        <button class="close-btn" onclick="closeModal()">×</button>
+      </div>
+
+      <form class="expense-form" onsubmit="addExpense(event)">
+        <input id="expenseTitle" type="text" placeholder="Expense name" required />
+
+        <input
+          id="expenseAmount"
+          type="number"
+          min="1"
+          step="1"
+          placeholder="Amount in ₹"
+          required
+        />
+
+        <select id="expenseCategory">
+          <option value="✈️ Transportation">✈️ Transportation</option>
+          <option value="🏨 Accommodation">🏨 Accommodation</option>
+          <option value="🍽️ Food & Drinks">🍽️ Food & Drinks</option>
+          <option value="🎟️ Activities">🎟️ Activities</option>
+          <option value="🛍️ Shopping">🛍️ Shopping</option>
+        </select>
+
+        <button class="save-btn" type="submit">Save Expense</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const totalBudget = 350000;
+    let spentBudget = 224000;
+
+    function formatRupees(amount) {
+      return "₹" + Number(amount).toLocaleString("en-IN");
+    }
+
+    function updateBudget() {
+      const remaining = totalBudget - spentBudget;
+      const usedPercentage = Math.min((spentBudget / totalBudget) * 100, 100);
+
+      document.getElementById("spentAmount").textContent = formatRupees(spentBudget);
+      document.getElementById("remainingBudget").textContent = formatRupees(remaining);
+      document.getElementById("donutAmount").textContent = formatRupees(spentBudget);
+      document.getElementById("usagePercent").textContent =
+        Math.round(usedPercentage) + "% Used";
+
+      document.getElementById("budgetProgress").style.width =
+        usedPercentage + "%";
+    }
+
+    function openModal() {
+      document.getElementById("expenseModal").classList.add("show");
+    }
+
+    function closeModal() {
+      document.getElementById("expenseModal").classList.remove("show");
+    }
+
+    function addExpense(event) {
+      event.preventDefault();
+
+      const title = document.getElementById("expenseTitle").value.trim();
+      const amount = Number(document.getElementById("expenseAmount").value);
+      const category = document.getElementById("expenseCategory").value;
+      const icon = category.split(" ")[0];
+
+      if (!title || amount <= 0) return;
+
+      const expense = document.createElement("article");
+      expense.className = "expense";
+
+      expense.innerHTML = `
+        <div class="expense-icon">${icon}</div>
+        <div class="expense-info">
+          <strong>${title}</strong>
+          <span>${category.substring(3)} • Today</span>
+        </div>
+        <div class="expense-price">${formatRupees(amount)}</div>
+      `;
+
+      document.getElementById("expenseList").prepend(expense);
+
+      spentBudget += amount;
+      updateBudget();
+
+      document.getElementById("expenseTitle").value = "";
+      document.getElementById("expenseAmount").value = "";
+      closeModal();
+    }
+
+    document.getElementById("expenseModal").addEventListener("click", function (event) {
+      if (event.target === this) closeModal();
+    });
+
+    const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+    if (user && user.fullName) {
+      document.getElementById("userName").textContent = user.fullName;
+
+      const initials = user.fullName
+        .split(" ")
+        .map(word => word[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase();
+
+      document.getElementById("userInitials").textContent = initials;
+    }
+
+    updateBudget();
+  </script>
+</body>
+</html>
