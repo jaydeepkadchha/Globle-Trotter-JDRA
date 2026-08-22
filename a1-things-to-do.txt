@@ -1,0 +1,1128 @@
+# GlobeTrotter — Frontend Screen Specification
+
+**Document:** Frontend Screen-by-Screen Specification  
+**Version:** 1.0  
+**Source:** Team Excalidraw mockup + GlobeTrotter project brief  
+**Scope:** Frontend structure, screens, components, interactions, navigation and UI states  
+**Screens:** 12
+
+---
+
+## 1. Purpose
+
+This document defines the frontend structure of the GlobeTrotter application.
+
+It is intended to act as the team's frontend blueprint before implementation. It specifies:
+
+- What screens exist
+- What each screen is responsible for
+- Major and minor UI elements
+- User actions
+- Navigation between screens
+- Search, filter, grouping and sorting behavior
+- Important UI states
+- Reusable components
+- Areas requiring clarification before implementation
+
+This document describes **frontend behavior and structure**. Database schema and backend implementation are outside the current scope.
+
+---
+
+# 2. Application-Level Frontend Structure
+
+## Core User Flow
+
+```text
+Login / Registration
+        ↓
+      Home
+        ↓
+ ┌──────┼───────────────┐
+ ↓      ↓               ↓
+Create  My Trips       Profile
+Trip
+ ↓
+Build Itinerary
+ ↓
+City / Activity Search
+ ↓
+Build Itinerary
+ ↓
+Itinerary + Budget
+ ├────────→ Calendar
+ └────────→ Community
+```
+
+## Administrative Flow
+
+```text
+Admin Login / Authorized User
+        ↓
+   Admin Panel
+   ├── Manage Users
+   ├── Popular Cities
+   ├── Popular Activities
+   └── User Trends & Analytics
+```
+
+---
+
+# 3. Global Frontend Requirements
+
+These elements should remain consistent across the application.
+
+## 3.1 Global Header
+
+Where applicable, the header should contain:
+
+- GlobeTrotter branding/logo
+- Navigation or menu control
+- User/profile access
+- Page title where appropriate
+- Logout/access control where appropriate
+
+## 3.2 Global Search Controls
+
+Several screens in the mockup use the same controls:
+
+- Search bar
+- Group By
+- Filter
+- Sort By
+
+These should be implemented as reusable UI components so that behavior and appearance remain consistent.
+
+## 3.3 Common UI States
+
+Every data-driven screen should account for:
+
+- Loading state
+- Empty state
+- Successful data state
+- Error state
+- No search results
+- Validation/error messages
+- Confirmation state for destructive actions
+
+## 3.4 Responsive Layout
+
+The frontend should remain usable on:
+
+- Desktop
+- Laptop
+- Tablet
+- Mobile
+
+The mockup is desktop-oriented, so responsive behavior should be treated as an implementation requirement rather than assumed to be represented visually in the mockup.
+
+---
+
+# 4. Screen 1 — Login
+
+## Purpose
+
+Authenticate an existing GlobeTrotter user and provide access to the main application.
+
+## Major UI Elements
+
+1. GlobeTrotter branding
+2. Login card/container
+3. User/profile image or visual placeholder
+4. Username input
+5. Password input
+6. Login button
+
+## Minor UI Elements
+
+- Input labels/placeholders
+- Password visibility control
+- Required-field indicators
+- Validation messages
+- Authentication error message
+- Loading state on Login button
+- Link/action to Registration
+- Link/action for password recovery if included
+
+## User Actions
+
+### Login
+
+```text
+Enter credentials
+      ↓
+Validate fields
+      ↓
+Submit
+      ↓
+Authentication
+      ↓
+Success → Screen 3
+Failure → Display error
+```
+
+## Validation
+
+- Username must not be empty
+- Password must not be empty
+- Invalid credentials must produce a clear error state
+
+## Navigation
+
+- Successful Login → **Screen 3: Main Landing Page**
+- Registration → **Screen 2**
+- Forgot Password → recovery flow if implemented
+
+---
+
+# 5. Screen 2 — Registration
+
+## Purpose
+
+Create a new GlobeTrotter user account.
+
+## Major UI Elements
+
+### Profile
+
+- Profile/photo upload area
+
+### Personal Information
+
+- First Name
+- Last Name
+- Email Address
+- Phone Number
+- City
+- Country
+
+### Additional Information
+
+- Additional-information section/field
+
+### Action
+
+- Register User button
+
+## Minor UI Elements
+
+- Field labels
+- Placeholders
+- Required/optional indicators
+- Inline validation
+- Image upload feedback
+- Email validation
+- Phone validation
+- Registration loading state
+- Registration success/error message
+
+## User Flow
+
+```text
+Enter user information
+        ↓
+Validate
+        ↓
+Register User
+        ↓
+Success
+        ↓
+Screen 3 — Main Landing Page
+```
+
+## Important Frontend Rule
+
+The registration form should prevent submission when required information is missing or invalid.
+
+---
+
+# 6. Screen 3 — Main Landing Page / Home
+
+## Purpose
+
+Serve as the primary dashboard after login.
+
+## Major UI Sections
+
+### A. Header
+
+- GlobeTrotter branding
+- User/profile access
+
+### B. Banner
+
+- Large banner/hero image
+- Travel-oriented visual content
+
+### C. Search Area
+
+- Search bar
+- Group By
+- Filter
+- Sort By
+
+### D. Top Regional Selections
+
+Destination cards representing recommended/regional selections.
+
+### E. Previous Trips
+
+Cards representing previously created trips.
+
+### F. Plan a Trip
+
+Primary action button.
+
+## Minor UI Elements
+
+Destination/trip cards may contain:
+
+- Image
+- Destination/trip name
+- Short description
+- Date information where available
+- View/open action
+
+## User Actions
+
+### Plan a Trip
+
+→ **Screen 4: Create a New Trip**
+
+### Select Previous Trip
+
+→ Relevant trip view / **Screen 9**
+
+### Search
+
+→ Display matching travel-related results.
+
+### Filter / Sort / Group
+
+→ Reorganize visible results without leaving the current screen unless a dedicated result screen is required.
+
+---
+
+# 7. Screen 4 — Create a New Trip
+
+## Purpose
+
+Start a new trip by defining its basic information.
+
+## Major UI Elements
+
+### Trip Information
+
+- Trip name/title
+- Start date
+- Destination/place
+- End date
+
+### Suggestions
+
+- Suggested places to visit
+- Suggested activities
+- Recommendation cards
+
+### Primary Action
+
+- Continue / Save / Create Trip action
+
+## Minor UI Elements
+
+- Date picker
+- Destination selector
+- Suggestion card image
+- Suggestion title
+- Suggestion details
+- Selection state
+- Validation messages
+- Loading state
+
+## User Flow
+
+```text
+Enter trip details
+       ↓
+Select destination
+       ↓
+Select dates
+       ↓
+Review suggestions
+       ↓
+Continue
+       ↓
+Screen 5 — Build Itinerary
+```
+
+## Important Mockup Clarification
+
+The current mockup visually contains two fields labelled **Start Date**.
+
+Before implementation, the team should confirm whether one of these is intended to be:
+
+- Trip Name, or
+- Destination/Place, or
+- Another field.
+
+Do not implement duplicate Start Date fields without confirmation.
+
+---
+
+# 8. Screen 5 — Build Itinerary
+
+## Purpose
+
+Construct the actual trip itinerary from multiple sections/stops.
+
+This is one of the application's primary working screens.
+
+## Major UI Structure
+
+Each itinerary section contains:
+
+- Section title/name
+- Section information/description
+- Date range
+- Section budget
+- Activities/content associated with the section
+
+### Add Another Section
+
+A dedicated action allows the user to add additional sections/stops.
+
+## Example Structure
+
+```text
+Trip
+ ├── Section 1
+ │    ├── Destination
+ │    ├── Date Range
+ │    ├── Activities
+ │    └── Budget
+ │
+ ├── Section 2
+ │    ├── Destination
+ │    ├── Date Range
+ │    ├── Activities
+ │    └── Budget
+ │
+ └── Section 3
+      ├── Destination
+      ├── Date Range
+      ├── Activities
+      └── Budget
+```
+
+## Major Functions
+
+- Add section
+- Select destination
+- Set section date range
+- Add activity
+- Remove activity
+- Edit section
+- Remove section
+- Set/update section budget
+- Reorder sections
+- Save/update itinerary
+
+## Search Integration
+
+Selecting a destination/activity should open or invoke:
+
+→ **Screen 8: Activity / City Search**
+
+After selection:
+
+→ Return to **Screen 5**
+
+## Minor UI Elements
+
+- Expand/collapse section
+- Edit button
+- Delete/remove button
+- Date picker
+- Budget input
+- Activity cards
+- Destination image
+- Save/continue action
+- Unsaved-change indication if required
+
+## Important Design Principle
+
+Screen 5 is the **editing/builder view**.
+
+Screen 9 is the **view/read/review view**.
+
+These two should not be treated as the same screen.
+
+---
+
+# 9. Screen 6 — User Trip Listing
+
+## Purpose
+
+Allow users to browse and manage their existing trips.
+
+## Major UI Sections
+
+### Search and Controls
+
+- Search bar
+- Group By
+- Filter
+- Sort By
+
+### Trip Categories
+
+1. Ongoing
+2. Upcoming
+3. Completed
+
+## Trip Card
+
+Each trip card should provide a short overview.
+
+Possible information from the mockup:
+
+- Trip image
+- Trip name
+- Date range
+- Destination/summary
+- Status
+- View action
+
+## User Actions
+
+### View Trip
+
+→ **Screen 9: Itinerary View + Budget**
+
+### Edit Trip
+
+→ Relevant editing screen, primarily **Screen 5**
+
+### Delete Trip
+
+→ Confirmation state → remove trip from list
+
+## Minor States
+
+- No ongoing trips
+- No upcoming trips
+- No completed trips
+- Search returned no trips
+- Delete confirmation
+- Loading
+
+---
+
+# 10. Screen 7 — User Profile
+
+## Purpose
+
+Display and manage the user's personal information and trip history.
+
+## Major UI Sections
+
+### A. User Information
+
+- Profile image
+- User details
+- Edit controls
+
+### B. Preplanned Trips
+
+Trip cards with View actions.
+
+### C. Previous Trips
+
+Trip cards with View actions.
+
+## User Actions
+
+- Edit profile
+- Update profile image
+- View preplanned trip
+- View previous trip
+
+## Navigation
+
+```text
+Profile
+ ├── Edit User Details
+ ├── Preplanned Trip → Trip View
+ └── Previous Trip → Trip View
+```
+
+## Minor UI Elements
+
+- Edit icon/button
+- Save/cancel actions
+- Profile-image placeholder
+- Empty state when no trips exist
+
+---
+
+# 11. Screen 8 — Activity Search / City Search
+
+## Purpose
+
+Provide a reusable search and selection interface for destinations and activities.
+
+The mockup represents this as a combined search concept.
+
+## Major UI Elements
+
+### Search Controls
+
+- Search bar
+- Group By
+- Filter
+- Sort By
+
+### Results
+
+Each result should display:
+
+- Option/name
+- Relevant details
+- Selection/action control
+
+## City Search
+
+Results may represent:
+
+- City name
+- Country/region
+- Relevant destination information
+- Selection action
+
+## Activity Search
+
+Results may represent:
+
+- Activity name
+- Activity details
+- Relevant metadata
+- Selection action
+
+## User Flow
+
+```text
+Screen 5
+   ↓
+Search
+   ↓
+Screen 8
+   ↓
+Search / Filter / Sort
+   ↓
+Select result
+   ↓
+Return to Screen 5
+```
+
+## Minor States
+
+- Loading results
+- No results
+- Search error
+- Selected state
+- Already-added state
+
+## Important Architecture Decision
+
+This should be treated as a **reusable selection/search component or flow**, even if the final implementation uses separate routes for City Search and Activity Search.
+
+---
+
+# 12. Screen 9 — Itinerary View + Budget
+
+## Purpose
+
+Display the completed itinerary in a clear day-by-day structure while showing associated expenses.
+
+## Major UI Elements
+
+### Header / Controls
+
+- Search
+- Group By
+- Filter
+- Sort By
+
+### Itinerary
+
+- Selected destination/trip
+- Day 1
+- Day 2
+- Additional days as required
+- Activities arranged in sequence
+
+### Activity Information
+
+- Physical/activity name
+- Expense/cost
+
+## Budget Integration
+
+Expenses should be visible alongside activities and/or summarized within the trip.
+
+## User Actions
+
+- View activity
+- Edit itinerary if editing is supported here
+- Filter itinerary
+- Sort/group itinerary
+- Navigate to related trip views
+
+## Minor UI Elements
+
+- Day selector
+- Activity cards
+- Expense values
+- Expand/collapse details
+- Empty day state
+
+## Important Design Principle
+
+This screen is primarily for **reviewing the itinerary**, whereas Screen 5 is primarily for **building/editing it**.
+
+---
+
+# 13. Screen 10 — Community Tab
+
+## Purpose
+
+Allow users to discover and share travel experiences related to places and activities.
+
+## Major UI Elements
+
+### Search and Controls
+
+- Search bar
+- Group By
+- Filter
+- Sort By
+
+### Community Feed
+
+Post cards containing travel experience content.
+
+## Major Functions
+
+- Browse posts
+- Search posts
+- Filter posts
+- Sort posts
+- Open/read a post
+- Share a travel experience
+
+## Minor UI Elements
+
+Depending on the team's final scope:
+
+- User/profile indicator
+- Post title
+- Destination/activity reference
+- Post content preview
+- Post details
+- Empty feed state
+- No-result state
+
+## Important Scope Note
+
+The mockup establishes the community as an experience-sharing area, but does not specify a detailed posting/commenting/liking model. Those features should not be assumed as mandatory without team confirmation.
+
+---
+
+# 14. Screen 11 — Calendar View
+
+## Purpose
+
+Provide a calendar-based overview of trips.
+
+## Major UI Elements
+
+### Search / Controls
+
+- Search bar
+- Group By
+- Filter
+- Sort By
+
+### Calendar
+
+- Month display
+- Previous/next month navigation
+- Date grid
+- Trip blocks spanning relevant dates
+
+## Trip Representation
+
+Trips should be visually distinguishable on their scheduled dates.
+
+Example:
+
+```text
+January
+
+5–10   PARIS TRIP
+15–22  NYC GETAWAY
+16–20  JAPAN ADVENTURE
+```
+
+## User Actions
+
+- Change month
+- Select date
+- Select trip
+- Open trip details
+
+## Navigation
+
+```text
+Calendar
+   ↓
+Select Trip
+   ↓
+Screen 9 — Itinerary View
+```
+
+## Minor States
+
+- Month with no trips
+- Multiple trips overlapping
+- Selected trip/date
+- Loading calendar data
+
+---
+
+# 15. Screen 12 — Admin Panel
+
+## Purpose
+
+Provide administrative management and analytics.
+
+This screen should only be available to authorized administrative users.
+
+## Major UI Sections
+
+### A. Manage Users
+
+- View users
+- Manage user information
+- User-related administrative actions
+
+### B. Popular Cities
+
+- Display popular cities
+- Review city popularity/trends
+
+### C. Popular Activities
+
+- Display popular activities
+- Review activity trends
+
+### D. User Trends and Analytics
+
+- User activity
+- Engagement/trends
+- Analytics visualizations
+
+## Major Controls
+
+- Search
+- Group By
+- Filter
+- Sort By
+
+## Minor UI Elements
+
+- Analytics cards
+- Charts
+- Tables/lists
+- Date/time period controls if required
+- Empty states
+- Loading states
+
+## Security Requirement
+
+Normal users must not have access to the Admin Panel.
+
+---
+
+# 16. Cross-Screen Navigation Map
+
+| From | Action | Destination |
+|---|---|---|
+| Login | Successful login | Home |
+| Login | Register | Registration |
+| Registration | Successful registration | Home |
+| Home | Plan a Trip | Create Trip |
+| Home | Previous Trip | Trip View |
+| Create Trip | Continue | Build Itinerary |
+| Build Itinerary | Add City | Search |
+| Build Itinerary | Add Activity | Search |
+| Search | Select City/Activity | Build Itinerary |
+| Build Itinerary | View/Save | Itinerary View |
+| My Trips | View | Itinerary View |
+| My Trips | Edit | Build/Edit Trip |
+| Profile | View Trip | Itinerary View |
+| Itinerary View | Calendar | Calendar |
+| Calendar | Select Trip | Itinerary View |
+| Home / Navigation | Community | Community |
+| Admin Access | Admin Panel | Admin Panel |
+
+---
+
+# 17. Reusable Frontend Components
+
+The team should avoid designing every screen independently.
+
+## Global Components
+
+- Header
+- Navigation/menu
+- Search bar
+- Filter button
+- Sort button
+- Group By control
+- Button styles
+- Input fields
+- Date picker
+- Modal
+- Confirmation dialog
+- Loading indicator
+- Error message
+- Empty-state component
+
+## Travel Components
+
+- Destination card
+- Activity card
+- Trip card
+- Itinerary section
+- Day section
+- Expense item
+- Calendar trip block
+- Recommendation card
+- Community post card
+
+## User Components
+
+- Profile card
+- Profile image uploader
+- User information form
+
+## Admin Components
+
+- Analytics card
+- Chart container
+- User table/list
+- Popularity list
+
+---
+
+# 18. UI State Requirements
+
+For each major data-driven component, account for:
+
+### Loading
+
+Show a loading indicator/skeleton while information is being retrieved.
+
+### Empty
+
+Example:
+
+```text
+No upcoming trips yet.
+Plan your first trip.
+[Plan a Trip]
+```
+
+### Error
+
+Show a readable error and provide a retry action where appropriate.
+
+### Search Empty
+
+```text
+No results found.
+Try a different search term or filter.
+```
+
+### Form Validation
+
+Show validation close to the relevant field.
+
+### Confirmation
+
+For destructive actions such as deleting a trip, ask for confirmation.
+
+---
+
+# 19. Frontend Priority
+
+Not every screen has equal importance for the MVP.
+
+## Priority 1 — Core Trip Creation
+
+1. Login
+2. Registration
+3. Home
+4. Create Trip
+5. Build Itinerary
+6. Search
+7. Itinerary View + Budget
+
+## Priority 2 — Trip Management
+
+8. My Trips
+9. Profile
+10. Calendar
+
+## Priority 3 — Extended Features
+
+11. Community
+12. Admin Panel
+
+This prioritization keeps the central product journey functional even if time becomes limited.
+
+---
+
+# 20. Main User Journey
+
+The complete primary journey should work like this:
+
+```text
+REGISTER / LOGIN
+       ↓
+     HOME
+       ↓
+  PLAN A TRIP
+       ↓
+  CREATE TRIP
+       ↓
+BUILD ITINERARY
+       ↓
+SEARCH CITY / ACTIVITY
+       ↓
+SELECT RESULT
+       ↓
+BUILD ITINERARY
+       ↓
+SAVE / VIEW
+       ↓
+ITINERARY + BUDGET
+       ↓
+ ┌─────┴────────┐
+ ↓              ↓
+CALENDAR      COMMUNITY
+```
+
+---
+
+# 21. Mockup Clarifications / Open Decisions
+
+These should be resolved by the team before frontend implementation.
+
+## 21.1 Create Trip — Duplicate Start Date
+
+The mockup shows two fields labelled "Start Date".
+
+**Action:** Confirm the intended field before implementation.
+
+## 21.2 Search — One Screen or Two
+
+The mockup labels Screen 8 as:
+
+**Activity Search Pages / City Search Page**
+
+**Recommendation:** Keep a common search/selection component and allow it to operate in City or Activity mode.
+
+## 21.3 Itinerary Sections
+
+The mockup uses "Section" rather than explicitly calling each section a "Stop" or "City".
+
+**Action:** Team should confirm terminology and behavior.
+
+## 21.4 Community Functionality
+
+The mockup confirms experience sharing, search, filtering and sorting, but does not fully define:
+
+- Comments
+- Likes
+- Following
+- Post creation workflow
+- Post editing/deletion
+
+These should be considered optional until confirmed.
+
+## 21.5 Admin
+
+Admin functionality should remain separate from the normal user journey and be role-protected.
+
+---
+
+# 22. Definition of Frontend Completion
+
+The frontend structure can be considered complete when:
+
+- All 12 mockup screens are represented.
+- Every major button has a defined action.
+- Navigation between screens is defined.
+- Core trip creation flow works conceptually from Login → Home → Create Trip → Build Itinerary → Search → Itinerary.
+- Search/filter/sort/group controls have defined purposes.
+- Loading, empty, error and validation states are accounted for.
+- Reusable components are identified.
+- Mockup ambiguities are resolved before implementation.
+- Admin functionality is isolated from normal users.
+- The frontend specification can be handed to the implementation team without requiring them to infer the intended screen flow.
+
+---
+
+## Final Architecture
+
+```text
+                    GLOBETROTTER
+                         │
+                ┌────────┴────────┐
+                │                 │
+             USER SIDE         ADMIN SIDE
+                │                 │
+        ┌───────┴────────┐       │
+        ↓                ↓       ↓
+ Authentication        HOME   ADMIN PANEL
+   1 + 2                3         12
+                         │
+          ┌──────────────┼──────────────┐
+          ↓              ↓              ↓
+      CREATE TRIP     MY TRIPS       PROFILE
+          4              6              7
+          │              │              │
+          └──────┬───────┴──────────────┘
+                 ↓
+          BUILD ITINERARY
+                 5
+                 │
+                 ↓
+          CITY / ACTIVITY
+              SEARCH
+                 8
+                 │
+                 ↓
+          BUILD ITINERARY
+                 │
+                 ↓
+       ITINERARY + BUDGET
+                 9
+              /     \
+             ↓       ↓
+         CALENDAR  COMMUNITY
+            11        10
+```
+
+**This document is the frontend blueprint for GlobeTrotter v1.0.**
