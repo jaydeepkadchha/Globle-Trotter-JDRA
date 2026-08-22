@@ -5,169 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GlobeTrotter | Calendar</title>
 
+  <!-- Base styles (variables, reset, sidebar, topbar, fade-down) -->
+  <link rel="stylesheet" href="css/style.css">
+
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      background: #f6f5f4;
-      color: #3d3939;
-    }
-
-    .app {
-      display: flex;
-      min-height: 100vh;
-    }
-
-    /* Sidebar */
-    .sidebar {
-      width: 280px;
-      min-height: 100vh;
-      position: fixed;
-      display: flex;
-      flex-direction: column;
-      padding: 52px 24px 32px;
-      background: #696465;
-      color: white;
-    }
-
-    .logo h1 {
-      font-size: 34px;
-      letter-spacing: -2px;
-    }
-
-    .logo p {
-      margin-top: 10px;
-      color: #ded9d9;
-      font-size: 13px;
-    }
-
-    .menu {
-      margin-top: 58px;
-      list-style: none;
-    }
-
-    .menu li {
-      margin-bottom: 17px;
-    }
-
-    .menu a {
-      display: block;
-      padding: 20px 28px;
-      border-radius: 18px;
-      color: #eee;
-      text-decoration: none;
-      font-size: 18px;
-      transition: 0.25s;
-    }
-
-    .menu a:hover,
-    .menu a.active {
-      background: #f1ece8;
-      color: #333;
-      font-weight: bold;
-    }
-
-    .profile {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-top: auto;
-      padding: 20px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      text-decoration: none;
-      transition: 0.25s;
-    }
-
-    .profile:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-2px);
-    }
-
-    .avatar {
-      width: 58px;
-      height: 58px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: #efcc9c;
-      color: #3c3a3a;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .profile strong,
-    .profile span {
-      display: block;
-    }
-
-    .profile span {
-      margin-top: 5px;
-      color: #ddd;
-      font-size: 14px;
-    }
-
-    /* Main */
-    .main-content {
-      width: calc(100% - 280px);
-      margin-left: 280px;
-      padding: 58px 65px;
-    }
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .topbar h1 {
-      font-size: 42px;
-      letter-spacing: -1px;
-    }
-
-    .topbar p {
-      margin-top: 10px;
-      color: #857e7d;
-      font-size: 17px;
-    }
-
-    .top-actions {
-      display: flex;
-      gap: 12px;
-    }
-
-    .icon-btn {
-      width: 58px;
-      height: 58px;
-      border: 0;
-      border-radius: 18px;
-      background: white;
-      font-size: 21px;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(50, 40, 40, 0.05);
-    }
+    /* =========================================
+       CALENDAR PAGE SPECIFIC STYLES
+    ========================================= */
 
     .calendar-layout {
       display: grid;
       grid-template-columns: minmax(0, 1fr) 300px;
       gap: 25px;
-      margin-top: 42px;
+      margin-top: 35px;
     }
 
     .card {
-      border-radius: 25px;
-      background: white;
-      box-shadow: 0 10px 28px rgba(50, 40, 40, 0.06);
+      border-radius: 24px;
+      background: var(--card);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
     }
 
-    /* Calendar */
+    /* --- Calendar Main Card --- */
     .calendar-card {
       padding: 28px;
       overflow: hidden;
@@ -183,11 +42,12 @@
 
     .calendar-toolbar h2 {
       font-size: 26px;
+      letter-spacing: -0.5px;
     }
 
     .calendar-toolbar p {
       margin-top: 5px;
-      color: #857e7d;
+      color: var(--muted);
       font-size: 13px;
     }
 
@@ -201,17 +61,18 @@
       min-width: 40px;
       height: 40px;
       padding: 0 12px;
-      border: 1px solid #e6e0dc;
-      border-radius: 11px;
-      background: #fff;
-      color: #655d5c;
+      border: 1px solid var(--pearl);
+      border-radius: 12px;
+      background: transparent;
+      color: var(--dark);
       cursor: pointer;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: bold;
+      transition: background 0.2s;
     }
 
     .month-controls button:hover {
-      background: #f4efeb;
+      background: var(--pearl);
     }
 
     .weekdays,
@@ -227,7 +88,7 @@
 
     .weekdays div {
       padding: 8px;
-      color: #9b9391;
+      color: var(--muted);
       font-size: 11px;
       font-weight: bold;
       letter-spacing: 0.7px;
@@ -241,10 +102,10 @@
     .day {
       min-height: 105px;
       padding: 9px;
-      border-top: 1px solid #ebe7e4;
-      border-right: 1px solid #ebe7e4;
+      border-top: 1px solid var(--pearl);
+      border-right: 1px solid var(--pearl);
       cursor: pointer;
-      transition: 0.2s;
+      transition: background 0.2s;
     }
 
     .day:nth-child(7n) {
@@ -252,15 +113,15 @@
     }
 
     .day:hover {
-      background: #fcfaf8;
+      background: var(--white);
     }
 
     .day.other-month {
-      background: #fdfcfb;
+      background: #fafafa; /* slightly off-white */
     }
 
     .day.other-month .date {
-      color: #c9c2be;
+      color: #ccc;
     }
 
     .date {
@@ -270,16 +131,17 @@
       place-items: center;
       margin-bottom: 7px;
       border-radius: 50%;
-      color: #625b5a;
+      color: var(--dark);
       font-size: 12px;
       font-weight: bold;
     }
 
     .day.today .date {
-      background: #aa9476;
+      background: var(--taupe);
       color: white;
     }
 
+    /* --- Event Pills --- */
     .event {
       overflow: hidden;
       margin: 4px 0;
@@ -291,34 +153,19 @@
       text-overflow: ellipsis;
     }
 
-    .event.trip {
-      background: #eee6da;
-      color: #866a43;
-    }
-
-    .event.activity {
-      background: #e1eeec;
-      color: #39726c;
-    }
-
-    .event.personal {
-      background: #eee8f4;
-      color: #775e91;
-    }
-
-    .event.completed {
-      background: #e5efe6;
-      color: #4f7960;
-    }
+    .event.trip { background: var(--peach); color: var(--dark); }
+    .event.activity { background: var(--seafoam); color: var(--dark); }
+    .event.personal { background: var(--pearl); color: var(--dark); }
+    .event.completed { background: var(--primary); color: white; }
 
     .more {
       padding: 4px;
-      color: #8b8380;
+      color: var(--muted);
       font-size: 10px;
       font-weight: bold;
     }
 
-    /* Right side */
+    /* --- Right Side Column --- */
     .side-column {
       display: flex;
       flex-direction: column;
@@ -327,7 +174,7 @@
 
     .upcoming,
     .legend {
-      padding: 22px;
+      padding: 24px;
     }
 
     .side-heading {
@@ -343,15 +190,21 @@
     }
 
     .side-heading a {
-      color: #aa9476;
+      color: var(--primary);
       font-size: 12px;
       font-weight: bold;
       text-decoration: none;
+      transition: 0.2s;
+    }
+    
+    .side-heading a:hover {
+      color: var(--dark);
     }
 
+    /* --- Upcoming Trips List --- */
     .trip {
       padding: 15px 0;
-      border-bottom: 1px solid #ebe7e4;
+      border-bottom: 1px solid var(--pearl);
     }
 
     .trip:last-child {
@@ -360,7 +213,7 @@
     }
 
     .trip-date {
-      color: #aa9476;
+      color: var(--taupe);
       font-size: 11px;
       font-weight: bold;
       letter-spacing: 0.5px;
@@ -369,12 +222,12 @@
 
     .trip-name {
       margin: 7px 0 5px;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: bold;
     }
 
     .trip-location {
-      color: #8a8380;
+      color: var(--muted);
       font-size: 12px;
     }
 
@@ -383,16 +236,17 @@
       margin-top: 12px;
       overflow: hidden;
       border-radius: 10px;
-      background: #ebe8e6;
+      background: var(--pearl);
     }
 
     .trip-progress span {
       display: block;
       height: 100%;
       border-radius: 10px;
-      background: #aa9476;
+      background: var(--taupe);
     }
 
+    /* --- Stats Widget --- */
     .stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -410,7 +264,8 @@
       place-items: center;
       margin-bottom: 14px;
       border-radius: 11px;
-      background: #f4efeb;
+      background: var(--pearl);
+      font-size: 18px;
     }
 
     .stat strong {
@@ -419,10 +274,13 @@
     }
 
     .stat span {
-      color: #8a8380;
+      color: var(--muted);
       font-size: 11px;
+      margin-top: 4px;
+      display: block;
     }
 
+    /* --- Legend --- */
     .legend h3 {
       margin-bottom: 16px;
     }
@@ -432,7 +290,7 @@
       align-items: center;
       gap: 10px;
       margin: 12px 0;
-      color: #776f6d;
+      color: var(--muted);
       font-size: 13px;
     }
 
@@ -442,21 +300,21 @@
       border-radius: 50%;
     }
 
-    .dot.trip { background: #aa9476; }
-    .dot.activity { background: #5d9b94; }
-    .dot.personal { background: #927aa8; }
-    .dot.completed { background: #6e9b7b; }
+    .dot.trip { background: var(--peach); }
+    .dot.activity { background: var(--seafoam); }
+    .dot.personal { background: var(--pearl); }
+    .dot.completed { background: var(--primary); }
 
-    /* Modal */
+    /* --- Modal --- */
     .modal-backdrop {
       display: none;
       position: fixed;
       inset: 0;
-      z-index: 10;
+      z-index: 100;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background: rgba(48, 42, 40, 0.45);
+      background: rgba(63, 59, 59, 0.45);
       backdrop-filter: blur(5px);
     }
 
@@ -467,8 +325,8 @@
     .modal {
       width: min(430px, 100%);
       padding: 28px;
-      border-radius: 23px;
-      background: white;
+      border-radius: 24px;
+      background: var(--card);
       box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
     }
 
@@ -487,14 +345,20 @@
       height: 36px;
       border: 0;
       border-radius: 10px;
-      background: #f3efec;
+      background: var(--pearl);
+      color: var(--dark);
       cursor: pointer;
       font-size: 20px;
+      transition: background 0.2s;
+    }
+    
+    .close-btn:hover {
+      background: var(--seafoam);
     }
 
     .modal-date {
       margin: 9px 0 22px;
-      color: #8b8380;
+      color: var(--muted);
       font-size: 13px;
     }
 
@@ -507,118 +371,104 @@
     .event-form input,
     .event-form select {
       padding: 13px;
-      border: 1px solid #e4ded9;
+      border: 1px solid var(--pearl);
       border-radius: 11px;
       outline: none;
       font-size: 14px;
+      background: transparent;
+      color: var(--dark);
+      font-family: inherit;
     }
 
     .event-form input:focus,
     .event-form select:focus {
-      border-color: #aa9476;
+      border-color: var(--taupe);
     }
 
-    .save-btn {
-      padding: 13px;
+    .save-event-btn {
+      padding: 14px;
+      margin-top: 8px;
       border: 0;
       border-radius: 11px;
-      background: #aa9476;
+      background: var(--primary);
       color: white;
       cursor: pointer;
       font-size: 14px;
       font-weight: bold;
+      transition: background 0.2s;
     }
 
-    @media (max-width: 1100px) {
-      .calendar-layout {
-        grid-template-columns: 1fr;
-      }
+    .save-event-btn:hover {
+      background: var(--dark);
+    }
 
-      .side-column {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-      }
+    /* --- Responsive Adjustments --- */
+    @media (max-width: 1100px) {
+      .calendar-layout { grid-template-columns: 1fr; }
+      .side-column { display: grid; grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 850px) {
-      .sidebar {
-        display: none;
-      }
-
-      .main-content {
-        width: 100%;
-        margin-left: 0;
-        padding: 35px 20px;
-      }
-
-      .calendar-card {
-        overflow-x: auto;
-      }
+      .calendar-card { overflow-x: auto; }
     }
 
     @media (max-width: 600px) {
-      .top-actions {
-        display: none;
-      }
-
-      .topbar h1 {
-        font-size: 34px;
-      }
-
-      .calendar-toolbar {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .side-column,
-      .stats {
-        grid-template-columns: 1fr;
-      }
+      .calendar-toolbar { align-items: flex-start; flex-direction: column; }
+      .side-column, .stats { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body>
   <div class="app">
-    <aside class="sidebar">
-      <div class="logo">
-        <h1>GlobeTrotter</h1>
-        <p>PLAN • EXPLORE • EXPERIENCE</p>
-      </div>
 
-      <ul class="menu">
-        <li><a href="dashboard.html">🏠 &nbsp; Dashboard</a></li>
-        <li><a href="trips.html">🧳 &nbsp; My Trips</a></li>
-        <li><a href="explore.html">🗺️ &nbsp; Explore</a></li>
-        <li><a class="active" href="calendar.html">🗓️ &nbsp; Calendar</a></li>
-        <li><a href="budget.html">💰 &nbsp; Budget</a></li>
-        <li><a href="settings.html">⚙️ &nbsp; Settings</a></li>
-      </ul>
-
-      <a href="profile.html" class="profile">
-        <div class="avatar" id="userInitials">YG</div>
-        <div>
-          <strong id="userName">Guest User</strong>
-          <span>Pro Traveler</span>
+    <!-- Sidebar (Standardized Structure) -->
+    <aside class="sidebar fade-down" style="--delay: 0s;">
+        <div class="logo">
+            <h1>✈ Globe<span>Trotter</span></h1>
+            <p>PLAN • EXPLORE • EXPERIENCE</p>
         </div>
-      </a>
+
+        <nav class="nav">
+            <a href="dashboard.html" class="nav-item"><span>⌂</span> Dashboard</a>
+            <a href="create-trip.html" class="nav-item"><span>＋</span> Create Trip</a>
+            <a href="trips.html" class="nav-item"><span>🧳</span> My Trips</a>
+            <a href="explore.html" class="nav-item"><span>🗺️</span> Explore</a>
+            <a href="calendar.html" class="nav-item active"><span>🗓️</span> Calendar</a>
+            <a href="budget.html" class="nav-item"><span>💰</span> Budget</a>
+            <a href="settings.html" class="nav-item"><span>⚙️</span> Settings</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="profile-mini">
+                <div class="avatar" id="userInitials">A</div>
+                <div>
+                    <strong id="userName">Arhan</strong>
+                    <small>Traveler</small>
+                </div>
+            </div>
+            <a href="login.html" class="nav-item" style="margin-top: 10px;"><span>↪</span> Logout</a>
+        </div>
     </aside>
 
-    <main class="main-content">
-      <header class="topbar">
-        <div>
-          <h1>Travel Calendar</h1>
-          <p>Organize your trips, activities, and important travel plans.</p>
-        </div>
+    <main class="main">
 
-        <div class="top-actions">
-          <button class="icon-btn">🔔</button>
-          <button class="icon-btn">🔍</button>
-        </div>
-      </header>
+      <!-- Topbar (Standardized Structure) -->
+      <div class="topbar fade-down" style="--delay: 0.1s;">
+          <div class="welcome">
+              <h2>Travel Calendar</h2>
+              <p>Organize your trips, activities, and important travel plans.</p>
+          </div>
+          <div class="top-actions">
+              <button class="icon-btn">🔔</button>
+              <button class="icon-btn">🔍</button>
+          </div>
+      </div>
 
       <section class="calendar-layout">
-        <div class="calendar-card card">
+        
+        <!-- Calendar Main View -->
+        <div class="calendar-card card fade-down" style="--delay: 0.2s;">
           <div class="calendar-toolbar">
             <div>
               <h2 id="monthName">Month Year</h2>
@@ -645,11 +495,13 @@
           <div class="days" id="calendarDays"></div>
         </div>
 
-        <aside class="side-column">
+        <!-- Right Side Widgets -->
+        <aside class="side-column fade-down" style="--delay: 0.3s;">
+          
           <section class="upcoming card">
             <div class="side-heading">
               <h3>Upcoming Trips</h3>
-              <a href="trips.html">View all →</a>
+              <a href="trips.html">View all &rarr;</a>
             </div>
 
             <div class="trip">
@@ -695,11 +547,14 @@
             <div class="legend-item"><span class="dot personal"></span>Personal</div>
             <div class="legend-item"><span class="dot completed"></span>Completed</div>
           </section>
+
         </aside>
       </section>
+
     </main>
   </div>
 
+  <!-- Add Event Modal -->
   <div class="modal-backdrop" id="modal">
     <div class="modal">
       <div class="modal-header">
@@ -719,7 +574,7 @@
           <option value="completed">Completed</option>
         </select>
 
-        <button class="save-btn" type="submit">Add to Calendar</button>
+        <button class="save-event-btn" type="submit">Add to Calendar</button>
       </form>
     </div>
   </div>
@@ -728,6 +583,7 @@
     let currentDate = new Date();
     let selectedDate = null;
 
+    // Hardcoded demo events
     const events = {
       "2026-06-12": [{ title: "Goa Beach Retreat", type: "trip" }],
       "2026-06-14": [{ title: "Water sports", type: "activity" }],
@@ -786,6 +642,7 @@
           dayCell.classList.add("other-month");
         }
 
+        // Check if today
         if (
           cellDate.getFullYear() === today.getFullYear() &&
           cellDate.getMonth() === today.getMonth() &&
@@ -878,11 +735,12 @@
       renderCalendar();
     }
 
+    // Close modal when clicking outside
     document.getElementById("modal").addEventListener("click", function (event) {
       if (event.target === this) closeModal();
     });
 
-    /* Shows the logged-in user's name from profile.html */
+    /* Shows the logged-in user's name from LocalStorage (if exists) */
     const user = JSON.parse(localStorage.getItem("loggedInUser"));
 
     if (user && user.fullName) {
@@ -898,6 +756,7 @@
       document.getElementById("userInitials").textContent = initials;
     }
 
+    // Initialize calendar on load
     renderCalendar();
   </script>
 </body>
