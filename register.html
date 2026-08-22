@@ -388,36 +388,35 @@
 
     <!-- REGISTER FORM -->
 
-    <form id="registerForm">
+<form id="registerForm" method="POST" action="register.php" enctype="multipart/form-data">
 
-
-      <!-- FULL NAME -->
-
+      <!-- FIRST NAME -->
       <div class="input-group">
-
-        <label for="fullName">
-          Full Name
-        </label>
-
+        <label for="first_name">First Name</label>
         <input
           type="text"
-          id="fullName"
-          name="fullName"
-          placeholder="Enter your full name"
+          id="first_name"
+          name="first_name"
+          placeholder="Enter your first name"
           required
         />
-
       </div>
 
+      <!-- LAST NAME -->
+      <div class="input-group">
+        <label for="last_name">Last Name</label>
+        <input
+          type="text"
+          id="last_name"
+          name="last_name"
+          placeholder="Enter your last name"
+          required
+        />
+      </div>
 
       <!-- USERNAME -->
-
       <div class="input-group">
-
-        <label for="username">
-          Username
-        </label>
-
+        <label for="username">Username</label>
         <input
           type="text"
           id="username"
@@ -425,18 +424,11 @@
           placeholder="Choose a username"
           required
         />
-
       </div>
 
-
       <!-- EMAIL -->
-
       <div class="input-group">
-
-        <label for="email">
-          Email Address
-        </label>
-
+        <label for="email">Email Address</label>
         <input
           type="email"
           id="email"
@@ -444,83 +436,67 @@
           placeholder="Enter your email address"
           required
         />
-
       </div>
 
-
       <!-- PASSWORD -->
-
       <div class="input-group">
-
-        <label for="password">
-          Password
-        </label>
-
+        <label for="password">Password</label>
         <input
           type="password"
           id="password"
           name="password"
-          placeholder="Create a password"
-          minlength="6"
+          placeholder="Create a password (min 8 chars)"
+          minlength="8"
           required
         />
-
       </div>
 
-
       <!-- CONFIRM PASSWORD -->
-
       <div class="input-group">
-
-        <label for="confirmPassword">
-          Confirm Password
-        </label>
-
+        <label for="confirmPassword">Confirm Password</label>
         <input
           type="password"
           id="confirmPassword"
           name="confirmPassword"
           placeholder="Confirm your password"
-          minlength="6"
+          minlength="8"
           required
         />
-
       </div>
 
+      <!-- PROFILE PHOTO (Optional, supported by your PHP) -->
+      <div class="input-group">
+        <label for="photo">Profile Photo (Optional)</label>
+        <input
+          type="file"
+          id="photo"
+          name="photo"
+          accept="image/png, image/jpeg, image/webp"
+        />
+      </div>
 
       <!-- TERMS -->
-
       <label class="terms">
-
         <input
           type="checkbox"
           required
         />
-
         <span>
-
           I agree to the
           <a href="#">Terms of Service</a>
           and
           <a href="#">Privacy Policy</a>.
-
         </span>
-
       </label>
 
-
       <!-- REGISTER -->
-
       <button
         class="register-btn"
         type="submit">
-
         Create Account
-
       </button>
 
     </form>
-
 
     <!-- DIVIDER -->
 
