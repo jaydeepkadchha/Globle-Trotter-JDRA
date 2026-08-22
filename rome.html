@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobeTrotter | Rome</title>
+    
+    <!-- Assuming your base styles and fade-down animation are in here -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* --- Page Specific Styles --- */
+        .city-hero {
+            background: var(--taupe, #A5937B); 
+            color: white;
+            border-radius: 24px;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .city-hero::after {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            right: -80px;
+            top: -110px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 12px;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+
+        .back-link:hover { color: white; }
+
+        .city-label {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 10px;
+            opacity: 0.7;
+        }
+
+        .city-hero h1 {
+            font-size: 38px;
+            margin-top: 8px;
+            letter-spacing: -1px;
+        }
+
+        .city-hero p {
+            margin-top: 7px;
+            font-size: 14px;
+            opacity: 0.82;
+            max-width: 500px;
+        }
+
+        .trip-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 20px;
+        }
+
+        .trip-pill {
+            padding: 8px 12px;
+            border-radius: 9px;
+            background: rgba(255, 255, 255, 0.12);
+            font-size: 11px;
+        }
+
+        /* --- AI Message --- */
+        .ai-message {
+            background: white;
+            border-radius: 16px;
+            padding: 17px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+        }
+
+        .ai-icon {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: var(--seafoam, #B8D8D0);
+            font-size: 19px;
+        }
+
+        .ai-message strong { font-size: 13px; }
+        .ai-message p {
+            color: var(--muted, #817A78);
+            font-size: 11px;
+            margin-top: 4px;
+        }
+
+        /* --- Content Grid --- */
+        .city-content {
+            display: grid;
+            grid-template-columns: 1.5fr 0.8fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .itinerary, .summary-card {
+            background: white;
+            border-radius: var(--radius, 18px);
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title h3 { font-size: 18px; }
+        .personalized {
+            padding: 6px 9px;
+            background: var(--seafoam, #B8D8D0);
+            border-radius: 8px;
+            font-size: 9px;
+            font-weight: bold;
+        }
+
+        /* --- Day Cards --- */
+        .day-card {
+            border: 1px solid #eee;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 14px;
+        }
+
+        .day-card:last-child { margin-bottom: 0; }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 17px;
+            background: var(--pearl, #E9E3DE);
+        }
+
+        .day-left {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .day-number {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: 9px;
+            background: var(--primary, #666161);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .day-left h4 { font-size: 13px; }
+        .day-left span {
+            display: block;
+            color: var(--muted, #817A78);
+            font-size: 10px;
+            margin-top: 3px;
+        }
+        .day-type { font-size: 10px; color: var(--muted, #817A78); }
+
+        /* --- Activities --- */
+        .activities { padding: 5px 17px 12px; }
+        .activity {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+            padding: 13px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .activity:last-child { border-bottom: none; }
+
+        .activity-icon {
+            width: 34px;
+            height: 34px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 9px;
+            background: var(--peach, #E3C49B);
+            font-size: 15px;
+        }
+
+        .activity-info { flex: 1; }
+        .activity-info strong { display: block; font-size: 12px; }
+        .activity-info p {
+            margin-top: 3px;
+            color: var(--muted, #817A78);
+            font-size: 10px;
+            line-height: 1.45;
+        }
+        .activity-time {
+            color: var(--taupe, #A5937B);
+            font-size: 10px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* --- Summary Card --- */
+        .summary-card h3 { font-size: 16px; margin-bottom: 16px; }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 11px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-row:last-child { border-bottom: none; }
+        .summary-row span { color: var(--muted, #817A78); font-size: 11px; }
+        .summary-row strong { font-size: 11px; text-align: right; }
+
+        /* --- Budget --- */
+        .budget-box {
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid #eee;
+        }
+        .budget-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .budget-top strong { font-size: 12px; }
+        .budget-top span { font-size: 10px; color: var(--muted, #817A78); }
+        .budget-track {
+            height: 7px;
+            margin-top: 11px;
+            background: var(--pearl, #E9E3DE);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .budget-fill {
+            width: 48%;
+            height: 100%;
+            background: var(--taupe, #A5937B);
+        }
+
+        /* --- Recommendations --- */
+        .recommendations { margin-top: 18px; }
+        .recommendations h4 { font-size: 13px; margin-bottom: 10px; }
+        .recommendation {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 0;
+        }
+        .recommendation-icon {
+            width: 32px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+            border-radius: 8px;
+            background: var(--peach, #E3C49B);
+        }
+        .recommendation strong { display: block; font-size: 11px; }
+        .recommendation span {
+            display: block;
+            color: var(--muted, #817A78);
+            font-size: 9px;
+            margin-top: 2px;
+        }
+
+        /* --- Action Buttons --- */
+        .actions {
+            display: flex;
+            gap: 9px;
+            margin-top: 18px;
+        }
+        .action-btn {
+            flex: 1;
+            padding: 11px 8px;
+            border-radius: 9px;
+            background: var(--pearl, #E9E3DE);
+            color: var(--dark, #3F3B3B);
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: background 0.2s;
+        }
+        .action-btn:hover { background: var(--seafoam, #B8D8D0); }
+        .action-btn.primary { background: var(--primary, #666161); color: white; }
+        .action-btn.primary:hover { background: var(--dark, #3F3B3B); }
+
+        /* --- Responsive --- */
+        @media (max-width: 950px) {
+            .city-content { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .city-hero { padding: 24px; }
+            .city-hero h1 { font-size: 29px; }
+            .itinerary { padding: 18px; }
+            .activity-time { display: none; }
+            .day-header { align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar fade-down" style="--delay: 0s;">
+        <div class="logo">
+            <h1>✈ Globe<span>Trotter</span></h1>
+            <p>Plan. Explore. Experience.</p>
+        </div>
+        <nav class="nav">
+            <a href="dashboard.html" class="nav-item"><span>⌂</span> Dashboard</a>
+            <a href="create-trip.html" class="nav-item active"><span>＋</span> Create Trip</a>
+            <a href="#" class="nav-item"><span>🧳</span> My Trips</a>
+            <a href="#" class="nav-item"><span>▣</span> Calendar</a>
+            <a href="#" class="nav-item"><span>◎</span> Profile</a>
+        </nav>
+        <div class="sidebar-bottom">
+            <div class="profile-mini">
+                <div class="avatar">A</div>
+                <div>
+                    <strong>Arhan</strong>
+                    <small>Traveler</small>
+                </div>
+            </div>
+            <a href="login.html" class="nav-item"><span>↪</span> Logout</a>
+        </div>
+    </aside>
+
+    <main class="main">
+
+        <!-- Hero Section -->
+        <section class="city-hero fade-down" style="--delay: 0.1s;">
+            <div class="hero-content">
+                <a href="create-trip.html" class="back-link">&larr; Change trip preferences</a>
+                <div class="city-label">Your personalized adventure</div>
+                <h1>🇮🇹 Rome, Italy</h1>
+                <p>A carefully planned journey through ancient empires, Renaissance masterpieces, authentic pasta, and vibrant cobblestone piazzas.</p>
+                
+                <div class="trip-pills">
+                    <span class="trip-pill">📅 5 Days</span>
+                    <span class="trip-pill">👥 2 Travelers</span>
+                    <span class="trip-pill">💰 ₹95,000</span>
+                    <span class="trip-pill">🏛️ History + Food</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Message -->
+        <div class="ai-message fade-down" style="--delay: 0.2s;">
+            <div class="ai-icon">✨</div>
+            <div>
+                <strong>Your Roman holiday is ready.</strong>
+                <p>We packed your itinerary with a healthy mix of deep history, leisurely walks, and the best traditional Roman trattorias.</p>
+            </div>
+        </div>
+
+        <div class="city-content">
+            
+            <!-- Itinerary Section -->
+            <section class="itinerary fade-down" style="--delay: 0.3s;">
+                <div class="section-title">
+                    <h3>Your Itinerary</h3>
+                    <span class="personalized">✨ PERSONALIZED</span>
+                </div>
+
+                <!-- DAY 1 -->
+                <article class="day-card">
+                    <div class="day-header">
+                        <div class="day-left">
+                            <div class="day-number">01</div>
+                            <div>
+                                <h4>Arrival & The Historic Center</h4>
+                                <span>Day 1 · Rome</span>
+                            </div>
+                        </div>
+                        <span class="day-type">Easy start</span>
+                    </div>
+
+                    <div class="activities">
+                        <div class="activity">
+                            <div class="activity-icon">🚊</div>
+                            <div class="activity-info">
+                                <strong>Arrive at Fiumicino Airport</strong>
+                                <p>Take the Leonardo Express to Termini and check into your hotel near the Pantheon.</p>
+                            </div>
+                            <span class="activity-time">11:00 AM</span>
+                        </div>
+                        <div class="activity">
+                            <div class="activity-icon">⛲</div>
+                            <div class="activity-info">
+                                <strong>Trevi Fountain & Spanish Steps</strong>
+                                <p>Toss a coin over your shoulder to ensure your return to Rome.</p>
+                            </div>
+                            <span class="activity-time">3:30 PM</span>
+                        </div>
+                        <div class="activity">
+                            <div class="activity-icon">🍨</div>
+                            <div class="activity-info">
+                                <strong>Pantheon & Gelato</strong>
+                                <p>Marvel at the ancient architecture before grabbing artisanal pistachio gelato nearby.</p>
+                            </div>
+                            <span class="activity-time">6:00 PM</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- DAY 2 -->
+                <article class="day-card">
+                    <div class="day-header">
+                        <div class="day-left">
+                            <div class="day-number">02</div>
+                            <div>
+                                <h4>Vatican City</h4>
+                                <span>Day 2 · Rome</span>
+                            </div>
+                        </div>
+                        <span class="day-type">Art & Religion</span>
+                    </div>
+
+                    <div class="activities">
+                        <div class="activity">
+                            <div class="activity-icon">🗝️</div>
+                            <div class="activity-info">
+                                <strong>Vatican Museums & Sistine Chapel</strong>
+                                <p>Use your skip-the-line tickets to view Michelangelo's legendary ceiling frescoes.</p>
+                            </div>
+                            <span class="activity-time">9:00 AM</span>
+                        </div>
+                        <div class="activity">
+                            <div class="activity-icon">⛪</div>
+                            <div class="activity-info">
+                                <strong>St. Peter's Basilica</strong>
+                                <p>Explore the largest church in the world and climb the dome for a city view.</p>
+                            </div>
+                            <span class="activity-time">1:30 PM</span>
+                        </div>
+                        <div class="activity">
+                            <div class="activity-icon">🍷</div>
+                            <div class="activity-info">
+                                <strong>Dinner in Trastevere</strong>
+                                <p>Cross the river to a vibrant neighborhood for Cacio e Pepe in a cozy local spot.</p>
+                            </div>
+                            <span class="activity-time">7:30 PM</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- DAY 3 -->
+                <article class="day-card">
+                    <div class="day-header">
+                        <div class="day-left">
+                            <div class="day-number">03</div>
+                            <div>
+                                <h4>The Ancient Empire</h4>
+                                <span>Day 3 · Rome</span>
+                            </div>
+                        </div>
+                        <span class="day-type">History</span>
+                    </div>
+
+                    <div class="activities">
+                        <div class="activity">
+                            <div class="activity-icon">🏛️</div>
+                            <div class="activity-info">
+                                <strong>Colosseum Underground Tour</strong>
+                                <p>Step into the arena where gladiators fought, exploring the dungeons below.</p>
+                            </div>
+                            <span class="activity-time">9:30 AM</span>
+                        </div>
+                        <div class="activity">
+                            <div class="activity-icon">🏛️</div>
+                            <div class="activity-info">
+                                <strong>Roman Forum & Palatine Hill</strong>
+                                <p>Walk among the ruins of ancient government buildings and imperial palaces.</p>
+                            </div>
+                            <span class="activity-time">1:00 PM</span>
+                        </div>
+                        <div class="activity">
+                            <div class="activity-icon">🍝</div>
+                            <div class="activity-info">
+                                <strong>Authentic Carbonara</strong>
+                                <p>Indulge in a classic Roman dinner in the historic Testaccio district.</p>
+                            </div>
+                            <span class="activity-time">8:00 PM</span>
+                        </div>
+                    </div>
+                </article>
+
+            </section>
+
+            <!-- Summary Sidebar -->
+            <aside class="fade-down" style="--delay: 0.4s;">
+                <div class="summary-card">
+                    <h3>Trip Overview</h3>
+                    
+                    <div class="summary-row">
+                        <span>Destination</span>
+                        <strong>Rome, Italy</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Duration</span>
+                        <strong>5 Days</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Travelers</span>
+                        <strong>2 People</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Style</span>
+                        <strong>Historical & Culinary</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Interests</span>
+                        <strong>Ancient Ruins, Pasta</strong>
+                    </div>
+
+                    <!-- Budget Widget -->
+                    <div class="budget-box">
+                        <div class="budget-top">
+                            <strong>Estimated Budget</strong>
+                            <span>₹45,600 / ₹95,000</span>
+                        </div>
+                        <div class="budget-track">
+                            <div class="budget-fill"></div>
+                        </div>
+                    </div>
+
+                    <!-- AI Recommendations -->
+                    <div class="recommendations">
+                        <h4>✨ AI Recommendations</h4>
+                        
+                        <div class="recommendation">
+                            <div class="recommendation-icon">🎟️</div>
+                            <div>
+                                <strong>Book ahead of time</strong>
+                                <span>The Colosseum & Vatican lines are famously long.</span>
+                            </div>
+                        </div>
+                        <div class="recommendation">
+                            <div class="recommendation-icon">☕</div>
+                            <div>
+                                <strong>Stand at the bar</strong>
+                                <span>In Italy, espresso costs more if you sit at a table!</span>
+                            </div>
+                        </div>
+                        <div class="recommendation">
+                            <div class="recommendation-icon">🥾</div>
+                            <div>
+                                <strong>Ditch the heels</strong>
+                                <span>Rome is all cobblestones—comfortable shoes are a must.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="actions">
+                        <button class="action-btn" onclick="window.location.href='create-trip.html'">✎ Edit</button>
+                        <button class="action-btn primary" onclick="saveTrip()">✓ Save Trip</button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+</div>
+
+<script>
+    function saveTrip() {
+        alert("Trip saved! ✨\n\nYour Roman adventure is now in My Trips.");
+    }
+</script>
+
+</body>
+</html>
