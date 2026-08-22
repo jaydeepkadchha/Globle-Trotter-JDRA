@@ -285,8 +285,8 @@
             <div class="profile-mini">
                 <div class="avatar">A</div>
                 <div>
-                    <strong>Arhan</strong>
-                    <small>Traveler</small>
+                    <strong id="profile-name">Arhan</strong>
+                    <small id="profile-role">Traveler</small>
                 </div>
             </div>
             <a href="login.html" class="nav-item" style="margin-top: 10px;"><span>↪</span> Logout</a>
@@ -424,6 +424,18 @@
   </div>
 
   <script>
+    // Keep the sidebar profile consistent with the signed-in user's saved details.
+    try {
+      const savedUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+      const profileName = savedUser?.name || localStorage.getItem("userName");
+      const profileRole = savedUser?.role || localStorage.getItem("userRole");
+
+      if (profileName) document.getElementById("profile-name").textContent = profileName;
+      if (profileRole) document.getElementById("profile-role").textContent = profileRole;
+    } catch (error) {
+      // Keep the default profile when saved data is unavailable or invalid.
+    }
+
     // Category Button Toggle Logic
     const categoryButtons = document.querySelectorAll(".category");
     categoryButtons.forEach((button) => {

@@ -556,13 +556,13 @@
 
             <div class="profile-mini">
 
-                <div class="avatar">
-                    A
+                <div class="avatar" id="profileAvatar">
+                    
                 </div>
 
                 <div>
 
-                    <strong>
+                    <strong id="profileFirstName">
                         Arhan
                     </strong>
 
@@ -1376,6 +1376,29 @@ document
 
 });
 
+</script>
+
+<script>
+/* Display the first name saved for the authenticated user. */
+(function () {
+    const savedUser = localStorage.getItem("loggedInUser") ||
+                      sessionStorage.getItem("loggedInUser");
+
+    if (!savedUser) return;
+
+    try {
+        const user = JSON.parse(savedUser);
+        const fullName = user.firstName || user.firstname || user.name || user.username;
+        const firstName = fullName && String(fullName).trim().split(/\s+/)[0];
+
+        if (firstName) {
+            document.getElementById("profileFirstName").textContent = firstName;
+            document.getElementById("profileAvatar").textContent = firstName.charAt(0).toUpperCase();
+        }
+    } catch (error) {
+        console.error("Unable to load the logged-in user.", error);
+    }
+}());
 </script>
 
 

@@ -348,7 +348,7 @@
             <div class="profile-mini">
                 <div class="avatar">A</div>
                 <div>
-                    <strong>Arhan</strong>
+                    <strong id="sidebar-username">Arhan</strong>
                     <small>Traveler</small>
                 </div>
             </div>
@@ -594,6 +594,11 @@
 </div>
 
 <script>
+    const username = localStorage.getItem("username") || localStorage.getItem("userName");
+    if (username) {
+        document.getElementById("sidebar-username").textContent = username.trim().split(/\s+/)[0];
+    }
+
     function saveTrip() {
         alert("Trip saved! ✨\n\nYour Dubai adventure is now in My Trips.");
     }
