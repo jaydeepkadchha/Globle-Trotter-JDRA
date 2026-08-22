@@ -3,9 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TravelGo | Login</title>
+  <title>GlobeTrotter | Login</title>
 
   <style>
+    :root {
+      --pearl: #E9E3DE;
+      --taupe: #A5937B;
+      --peach: #E3C49B;
+      --charcoal: #666161;
+      --seafoam: #B8D8D0;
+
+      --dark: #3F3B3B;
+      --muted: #817A78;
+      --white: #FFFFFF;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -18,18 +30,36 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #0b5ed7, #5ac8fa);
+
+      /* Pearl background with subtle warm gradient */
+      background: linear-gradient(
+        135deg,
+        var(--pearl),
+        #F3EEE9
+      );
+
       padding: 20px;
     }
 
     .login-card {
       width: 100%;
       max-width: 420px;
+
       padding: 38px 32px;
+
       border-radius: 18px;
-      background: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+
+      background: rgba(255, 255, 255, 0.96);
+
+      box-shadow:
+        0 15px 40px rgba(102, 97, 97, 0.18);
+
+      border: 1px solid rgba(165, 147, 123, 0.18);
     }
+
+    /* =========================
+       BRAND
+    ========================== */
 
     .brand {
       text-align: center;
@@ -37,15 +67,24 @@
     }
 
     .brand h1 {
-      color: #0b5ed7;
+      color: var(--charcoal);
       font-size: 30px;
       margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .brand h1 span {
+      color: var(--taupe);
     }
 
     .brand p {
-      color: #666;
+      color: var(--muted);
       font-size: 14px;
     }
+
+    /* =========================
+       INPUTS
+    ========================== */
 
     .input-group {
       margin-bottom: 18px;
@@ -53,7 +92,7 @@
 
     label {
       display: block;
-      color: #333;
+      color: var(--dark);
       font-size: 14px;
       font-weight: bold;
       margin-bottom: 7px;
@@ -62,116 +101,248 @@
     input {
       width: 100%;
       padding: 13px;
-      border: 1px solid #ddd;
+
+      border: 1px solid #D8D1CC;
       border-radius: 9px;
+
       outline: none;
+
       font-size: 15px;
+
+      color: var(--dark);
+      background: #FCFAF8;
+
       transition: 0.3s;
     }
 
-    input:focus {
-      border-color: #0b5ed7;
-      box-shadow: 0 0 0 3px rgba(11, 94, 215, 0.15);
+    input::placeholder {
+      color: #AAA3A0;
     }
+
+    input:focus {
+      border-color: var(--taupe);
+
+      box-shadow:
+        0 0 0 3px rgba(165, 147, 123, 0.16);
+
+      background: white;
+    }
+
+    /* =========================
+       FORGOT PASSWORD
+    ========================== */
 
     .forgot-password {
       display: block;
+
       margin: -6px 0 20px;
-      color: #0b5ed7;
+
+      color: var(--taupe);
+
       font-size: 13px;
+
       text-align: right;
+
       text-decoration: none;
+
+      transition: 0.2s;
     }
+
+    .forgot-password:hover {
+      color: var(--charcoal);
+    }
+
+    /* =========================
+       BUTTONS
+    ========================== */
 
     .login-btn,
     .social-btn {
       width: 100%;
+
       padding: 13px;
+
       border-radius: 9px;
+
       font-size: 15px;
       font-weight: bold;
+
       cursor: pointer;
+
       transition: 0.3s;
     }
 
     .login-btn {
       border: none;
-      background: #0b5ed7;
+
+      background: var(--charcoal);
       color: white;
     }
 
     .login-btn:hover {
-      background: #094bac;
+      background: #514D4D;
+
       transform: translateY(-1px);
+
+      box-shadow:
+        0 6px 15px rgba(102, 97, 97, 0.22);
     }
+
+    /* =========================
+       DIVIDER
+    ========================== */
 
     .divider {
       display: flex;
       align-items: center;
+
       gap: 12px;
-      color: #888;
+
+      color: var(--muted);
+
       font-size: 13px;
+
       margin: 25px 0;
     }
 
     .divider::before,
     .divider::after {
       content: "";
+
       flex: 1;
+
       height: 1px;
-      background: #ddd;
+
+      background: #DDD6D1;
     }
+
+    /* =========================
+       SOCIAL BUTTONS
+    ========================== */
 
     .social-btn {
       display: flex;
+
       align-items: center;
       justify-content: center;
+
       gap: 10px;
-      border: 1px solid #ddd;
+
+      border: 1px solid #D8D1CC;
+
       background: white;
+
       margin-bottom: 12px;
-      color: #333;
+
+      color: var(--dark);
     }
 
     .social-btn:hover {
-      background: #f5f5f5;
+      background: var(--pearl);
+
+      border-color: var(--taupe);
     }
 
     .github-btn {
-      background: #24292f;
+      background: var(--charcoal);
+
       color: white;
+
       border: none;
     }
 
     .github-btn:hover {
-      background: #111;
+      background: #514D4D;
     }
+
+    /* =========================
+       SIGN UP
+    ========================== */
 
     .signup-text {
       margin-top: 22px;
+
       text-align: center;
-      color: #666;
+
+      color: var(--muted);
+
       font-size: 14px;
     }
 
     .signup-text a {
-      color: #0b5ed7;
+      color: var(--taupe);
+
       font-weight: bold;
+
       text-decoration: none;
     }
+
+    .signup-text a:hover {
+      color: var(--charcoal);
+    }
+
+    /* =========================
+       SMALL SEAFOAM ACCENT
+    ========================== */
+
+    .brand::after {
+      content: "";
+
+      display: block;
+
+      width: 42px;
+      height: 4px;
+
+      margin: 16px auto 0;
+
+      border-radius: 10px;
+
+      background: var(--seafoam);
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 500px) {
+
+      body {
+        padding: 15px;
+      }
+
+      .login-card {
+        padding: 32px 24px;
+      }
+
+      .brand h1 {
+        font-size: 27px;
+      }
+    }
+
   </style>
 </head>
 
 <body>
+
   <main class="login-card">
+
     <div class="brand">
-      <h1>✈ TravelGo</h1>
-      <p>Sign in and plan your next adventure.</p>
+      <h1>✈ Globe<span>Trotter</span></h1>
+
+      <p>
+        Sign in and plan your next adventure.
+      </p>
     </div>
 
+
     <form>
+
       <div class="input-group">
-        <label for="username">Username or Email</label>
+
+        <label for="username">
+          Username or Email
+        </label>
+
         <input
           type="text"
           id="username"
@@ -179,10 +350,16 @@
           placeholder="Enter your username"
           required
         />
+
       </div>
 
+
       <div class="input-group">
-        <label for="password">Password</label>
+
+        <label for="password">
+          Password
+        </label>
+
         <input
           type="password"
           id="password"
@@ -190,29 +367,68 @@
           placeholder="Enter your password"
           required
         />
+
       </div>
 
-      <a class="forgot-password" href="#">Forgot password?</a>
 
-      <button class="login-btn" type="submit">Login</button>
+      <a
+        class="forgot-password"
+        href="#">
+
+        Forgot password?
+
+      </a>
+
+
+      <button
+        class="login-btn"
+        type="submit">
+
+        Login
+
+      </button>
+
     </form>
 
-    <div class="divider">OR</div>
 
-    <button class="social-btn" type="button">
+    <div class="divider">
+      OR
+    </div>
+
+
+    <button
+      class="social-btn"
+      type="button">
+
       <span>🔵</span>
+
       Continue with Google
+
     </button>
 
-    <button class="social-btn github-btn" type="button">
+
+    <button
+      class="social-btn github-btn"
+      type="button">
+
       <span>⌘</span>
+
       Continue with GitHub
+
     </button>
+
 
     <p class="signup-text">
+
       Don't have an account?
-      <a href="#">Create account</a>
+
+      <a href="#">
+        Create account
+      </a>
+
     </p>
+
   </main>
+
 </body>
 </html>
