@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GlobeTrotter | Explore</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f6f5f4;
+      color: #393636;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      min-height: 100vh;
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      padding: 52px 24px 32px;
+      background: #696465;
+      color: white;
+    }
+
+    .logo h1 {
+      font-size: 34px;
+      letter-spacing: -2px;
+    }
+
+    .logo p {
+      margin-top: 10px;
+      color: #ded9d9;
+      font-size: 13px;
+    }
+
+    .menu {
+      margin-top: 58px;
+      list-style: none;
+    }
+
+    .menu li {
+      margin-bottom: 17px;
+    }
+
+    .menu a {
+      display: block;
+      padding: 20px 28px;
+      border-radius: 18px;
+      color: #eee;
+      text-decoration: none;
+      font-size: 18px;
+      transition: 0.25s;
+    }
+
+    .menu a:hover,
+    .menu a.active {
+      background: #f1ece8;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: auto;
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .avatar {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #efcc9c;
+      color: #3c3a3a;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .profile strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .profile span {
+      display: block;
+      margin-top: 5px;
+      color: #ddd;
+      font-size: 14px;
+    }
+
+    /* Main */
+    .main-content {
+      width: calc(100% - 280px);
+      margin-left: 280px;
+      padding: 64px 74px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .topbar h2 {
+      font-size: 46px;
+      letter-spacing: -2px;
+    }
+
+    .topbar p {
+      margin-top: 10px;
+      color: #857e7d;
+      font-size: 19px;
+    }
+
+    .icon-buttons {
+      display: flex;
+      gap: 16px;
+    }
+
+    .icon-btn {
+      width: 64px;
+      height: 64px;
+      display: grid;
+      place-items: center;
+      border: 0;
+      border-radius: 20px;
+      background: white;
+      cursor: pointer;
+      font-size: 25px;
+      box-shadow: 0 8px 20px rgba(50, 40, 40, 0.05);
+    }
+
+    /* Hero */
+    .explore-hero {
+      position: relative;
+      overflow: hidden;
+      margin-top: 52px;
+      padding: 48px 52px;
+      border-radius: 34px;
+      color: white;
+      background:
+        linear-gradient(90deg, rgba(44, 47, 46, 0.76), rgba(44, 47, 46, 0.18)),
+        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
+    }
+
+    .explore-hero::after {
+      content: "";
+      position: absolute;
+      width: 370px;
+      height: 370px;
+      right: -100px;
+      top: -140px;
+      border: 40px solid rgba(255, 255, 255, 0.12);
+      border-radius: 50%;
+    }
+
+    .explore-hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .explore-hero span {
+      font-size: 15px;
+      letter-spacing: 3px;
+    }
+
+    .explore-hero h1 {
+      max-width: 610px;
+      margin: 16px 0;
+      font-size: 48px;
+      line-height: 1.05;
+    }
+
+    .explore-hero p {
+      max-width: 560px;
+      color: #f5f5f5;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 620px;
+      margin-top: 28px;
+      padding: 8px 8px 8px 20px;
+      border-radius: 15px;
+      background: white;
+    }
+
+    .search-box input {
+      flex: 1;
+      border: 0;
+      outline: 0;
+      color: #333;
+      font-size: 15px;
+    }
+
+    .search-box button {
+      border: 0;
+      padding: 14px 22px;
+      border-radius: 11px;
+      background: #aa9476;
+      color: white;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    /* Categories */
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 48px 0 20px;
+    }
+
+    .section-heading h3 {
+      font-size: 29px;
+    }
+
+    .section-heading a {
+      color: #655d5c;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .category {
+      padding: 21px;
+      border: 0;
+      border-radius: 20px;
+      background: white;
+      color: #444;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 7px 20px rgba(50, 40, 40, 0.04);
+      transition: 0.25s;
+    }
+
+    .category:hover,
+    .category.active {
+      transform: translateY(-4px);
+      background: #aa9476;
+      color: white;
+    }
+
+    .category .emoji {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 29px;
+    }
+
+    .category strong {
+      font-size: 16px;
+    }
+
+    /* Destination cards */
+    .destinations {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+    }
+
+    .destination-card {
+      overflow: hidden;
+      border-radius: 24px;
+      background: white;
+      box-shadow: 0 10px 25px rgba(55, 45, 45, 0.07);
+      transition: 0.3s;
+    }
+
+    .destination-card:hover {
+      transform: translateY(-7px);
+    }
+
+    .destination-image {
+      height: 190px;
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .card-content h4 {
+      font-size: 21px;
+    }
+
+    .rating {
+      padding: 7px 9px;
+      border-radius: 10px;
+      background: #fbf1df;
+      color: #966f31;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .location {
+      margin: 9px 0 15px;
+      color: #898383;
+      font-size: 14px;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #aa9476;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .save-btn {
+      border: 0;
+      border-radius: 10px;
+      padding: 9px 11px;
+      background: #f3f0ed;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    @media (max-width: 1100px) {
+      .sidebar {
+        width: 220px;
+      }
+
+      .main-content {
+        width: calc(100% - 220px);
+        margin-left: 220px;
+        padding: 45px 35px;
+      }
+
+      .destinations {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .sidebar {
+        display: none;
+      }
+
+      .main-content {
+        width: 100%;
+        margin-left: 0;
+        padding: 30px 20px;
+      }
+
+      .topbar h2 {
+        font-size: 34px;
+      }
+
+      .explore-hero {
+        padding: 35px 26px;
+      }
+
+      .explore-hero h1 {
+        font-size: 36px;
+      }
+
+      .destinations,
+      .categories {
+        grid-template-columns: 1fr;
+      }
+
+      .icon-buttons {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo">
+        <h1>GlobeTrotter</h1>
+        <p>PLAN • EXPLORE • EXPERIENCE</p>
+      </div>
+
+      <nav>
+        <ul class="menu">
+          <li><a href="dashboard.html">🏠 &nbsp; Dashboard</a></li>
+          <li><a href="trips.html">🧳 &nbsp; My Trips</a></li>
+          <li><a class="active" href="explore.html">🗺️ &nbsp; Explore</a></li>
+          <li><a href="calendar.html">🗓️ &nbsp; Calendar</a></li>
+          <li><a href="budget.html">💰 &nbsp; Budget</a></li>
+          <li><a href="settings.html">⚙️ &nbsp; Settings</a></li>
+        </ul>
+      </nav>
+
+      <div class="profile">
+        <div class="avatar">YG</div>
+        <div>
+          <strong>Guest User</strong>
+          <span>Pro Traveler</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <h2>Explore the world</h2>
+          <p>Find places that turn your travel dreams into plans.</p>
+        </div>
+
+        <div class="icon-buttons">
+          <button class="icon-btn" aria-label="Notifications">🔔</button>
+          <button class="icon-btn" aria-label="Search">🔍</button>
+        </div>
+      </header>
+
+      <section class="explore-hero">
+        <span>DISCOVER YOUR NEXT ESCAPE</span>
+        <h1>Every journey begins with a little curiosity.</h1>
+        <p>Search beautiful destinations, save your favorites, and create an unforgettable itinerary.</p>
+
+        <div class="search-box">
+          <span>🔍</span>
+          <input type="text" placeholder="Search countries, cities or experiences..." />
+          <button type="button">Explore</button>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-heading">
+          <h3>Explore by interest</h3>
+          <a href="#">View all →</a>
+        </div>
+
+        <div class="categories">
+          <button class="category active">
+            <span class="emoji">🏖️</span>
+            <strong>Beach Escapes</strong>
+          </button>
+
+          <button class="category">
+            <span class="emoji">🏔️</span>
+            <strong>Mountain Trips</strong>
+          </button>
+
+          <button class="category">
+            <span class="emoji">🏛️</span>
+            <strong>Culture & History</strong>
+          </button>
+
+          <button class="category">
+            <span class="emoji">🌿</span>
+            <strong>Nature & Wildlife</strong>
+          </button>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-heading">
+          <h3>Popular destinations</h3>
+          <a href="#">View all →</a>
+        </div>
+
+        <div class="destinations">
+          <article class="destination-card">
+            <img
+              class="destination-image"
+              src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=80"
+              alt="Bali, Indonesia"
+            />
+            <div class="card-content">
+              <div class="card-top">
+                <h4>Bali</h4>
+                <span class="rating">★ 4.9</span>
+              </div>
+              <p class="location">📍 Indonesia</p>
+              <div class="card-footer">
+                <span>From $620</span>
+                <button class="save-btn" aria-label="Save Bali">♡</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="destination-card">
+            <img
+              class="destination-image"
+              src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=80"
+              alt="Santorini, Greece"
+            />
+            <div class="card-content">
+              <div class="card-top">
+                <h4>Santorini</h4>
+                <span class="rating">★ 4.8</span>
+              </div>
+              <p class="location">📍 Greece</p>
+              <div class="card-footer">
+                <span>From $790</span>
+                <button class="save-btn" aria-label="Save Santorini">♡</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="destination-card">
+            <img
+              class="destination-image"
+              src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=900&q=80"
+              alt="Tokyo, Japan"
+            />
+            <div class="card-content">
+              <div class="card-top">
+                <h4>Tokyo</h4>
+                <span class="rating">★ 4.9</span>
+              </div>
+              <p class="location">📍 Japan</p>
+              <div class="card-footer">
+                <span>From $850</span>
+                <button class="save-btn" aria-label="Save Tokyo">♡</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const categoryButtons = document.querySelectorAll(".category");
+
+    categoryButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        categoryButtons.forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+      });
+    });
+
+    const saveButtons = document.querySelectorAll(".save-btn");
+
+    saveButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        button.textContent = button.textContent === "♡" ? "♥" : "♡";
+      });
+    });
+  </script>
+</body>
+</html>

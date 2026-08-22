@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GlobeTrotter | My Profile</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #f6f5f4;
+      color: #3d3939;
+    }
+
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      min-height: 100vh;
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      padding: 52px 24px 32px;
+      background: #696465;
+      color: white;
+    }
+
+    .logo h1 {
+      font-size: 34px;
+      letter-spacing: -2px;
+    }
+
+    .logo p {
+      margin-top: 10px;
+      color: #ded9d9;
+      font-size: 13px;
+    }
+
+    .menu {
+      margin-top: 58px;
+      list-style: none;
+    }
+
+    .menu li {
+      margin-bottom: 17px;
+    }
+
+    .menu a {
+      display: block;
+      padding: 20px 28px;
+      border-radius: 18px;
+      color: #eee;
+      text-decoration: none;
+      font-size: 18px;
+      transition: 0.25s;
+    }
+
+    .menu a:hover,
+    .menu a.active {
+      background: #f1ece8;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .sidebar-profile {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: auto;
+      padding: 20px;
+      border-radius: 20px;
+      background: #f1ece8;
+      color: #343131;
+      text-decoration: none;
+    }
+
+    .small-avatar {
+      width: 56px;
+      height: 56px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #efcc9c;
+      color: #3c3a3a;
+      font-size: 19px;
+      font-weight: bold;
+    }
+
+    .sidebar-profile strong,
+    .sidebar-profile span {
+      display: block;
+    }
+
+    .sidebar-profile span {
+      margin-top: 5px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    /* Main content */
+    .main-content {
+      width: calc(100% - 280px);
+      margin-left: 280px;
+      padding: 58px 74px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header h1 {
+      font-size: 42px;
+      letter-spacing: -1px;
+    }
+
+    .header p {
+      margin-top: 9px;
+      color: #857e7d;
+      font-size: 17px;
+    }
+
+    .back-button {
+      padding: 14px 20px;
+      border-radius: 12px;
+      background: white;
+      color: #665d5b;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 8px 20px rgba(50, 40, 40, 0.06);
+    }
+
+    .profile-card {
+      display: grid;
+      grid-template-columns: 270px 1fr;
+      gap: 42px;
+      max-width: 1100px;
+      margin-top: 42px;
+      padding: 42px;
+      border-radius: 30px;
+      background: white;
+      box-shadow: 0 12px 35px rgba(50, 40, 40, 0.07);
+    }
+
+    .profile-summary {
+      padding: 32px 22px;
+      border-radius: 24px;
+      text-align: center;
+      color: white;
+      background: #aa9476;
+    }
+
+    .large-avatar {
+      width: 120px;
+      height: 120px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 20px;
+      border: 5px solid rgba(255, 255, 255, 0.35);
+      border-radius: 50%;
+      background: #efcc9c;
+      color: #3d3939;
+      font-size: 38px;
+      font-weight: bold;
+    }
+
+    .profile-summary h2 {
+      font-size: 24px;
+    }
+
+    .profile-summary p {
+      margin-top: 8px;
+      color: #fff4e5;
+      font-size: 14px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .stats strong {
+      display: block;
+      font-size: 23px;
+    }
+
+    .stats span {
+      color: #fff4e5;
+      font-size: 12px;
+    }
+
+    .details h2 {
+      margin-bottom: 28px;
+      font-size: 27px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      color: #817a79;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #e2ddda;
+      border-radius: 11px;
+      outline: none;
+      background: #fbfaf9;
+      color: #3d3939;
+      font-size: 15px;
+    }
+
+    .field input:focus {
+      border-color: #aa9476;
+      box-shadow: 0 0 0 3px rgba(170, 148, 118, 0.13);
+    }
+
+    .button-row {
+      margin-top: 30px;
+    }
+
+    .save-btn,
+    .logout-btn {
+      padding: 14px 22px;
+      border-radius: 11px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .save-btn {
+      border: 0;
+      background: #aa9476;
+      color: white;
+    }
+
+    .save-btn:hover {
+      background: #907858;
+    }
+
+    .logout-btn {
+      margin-left: 10px;
+      border: 1px solid #d9d3cf;
+      background: white;
+      color: #716968;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        display: none;
+      }
+
+      .main-content {
+        width: 100%;
+        margin-left: 0;
+        padding: 32px 20px;
+      }
+
+      .profile-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo">
+        <h1>GlobeTrotter</h1>
+        <p>PLAN • EXPLORE • EXPERIENCE</p>
+      </div>
+
+      <ul class="menu">
+        <li><a href="dashboard.html">🏠 &nbsp; Dashboard</a></li>
+        <li><a href="trips.html">🧳 &nbsp; My Trips</a></li>
+        <li><a href="explore.html">🗺️ &nbsp; Explore</a></li>
+        <li><a href="calendar.html">🗓️ &nbsp; Calendar</a></li>
+        <li><a href="budget.html">💰 &nbsp; Budget</a></li>
+        <li><a href="settings.html">⚙️ &nbsp; Settings</a></li>
+      </ul>
+
+      <a class="sidebar-profile active" href="profile.html">
+        <div class="small-avatar" id="sidebarInitials">YG</div>
+        <div>
+          <strong id="sidebarName">Guest User</strong>
+          <span>Pro Traveler</span>
+        </div>
+      </a>
+    </aside>
+
+    <main class="main-content">
+      <header class="header">
+        <div>
+          <h1>My Profile</h1>
+          <p>Manage your personal information and travel preferences.</p>
+        </div>
+
+        <a class="back-button" href="dashboard.html">← Dashboard</a>
+      </header>
+
+      <section class="profile-card">
+        <aside class="profile-summary">
+          <div class="large-avatar" id="profileInitials">YG</div>
+          <h2 id="profileName">Guest User</h2>
+          <p>Pro Traveler</p>
+
+          <div class="stats">
+            <div>
+              <strong>3</strong>
+              <span>Upcoming Trips</span>
+            </div>
+            <div>
+              <strong>12</strong>
+              <span>Places Saved</span>
+            </div>
+          </div>
+        </aside>
+
+        <section class="details">
+          <h2>Personal Information</h2>
+
+          <form id="profileForm">
+            <div class="form-grid">
+              <div class="field">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" required />
+              </div>
+
+              <div class="field">
+                <label for="username">Username</label>
+                <input type="text" id="username" required />
+              </div>
+
+              <div class="field">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required />
+              </div>
+
+              <div class="field">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" placeholder="+91 00000 00000" />
+              </div>
+
+              <div class="field">
+                <label for="country">Country</label>
+                <input type="text" id="country" placeholder="India" />
+              </div>
+
+              <div class="field">
+                <label for="travelStyle">Favorite Travel Style</label>
+                <input type="text" id="travelStyle" placeholder="Beach, Adventure, Culture..." />
+              </div>
+            </div>
+
+            <div class="button-row">
+              <button class="save-btn" type="submit">Save Changes</button>
+              <button class="logout-btn" type="button" id="logoutButton">Logout</button>
+            </div>
+          </form>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Uses data saved after login or profile updates.
+    // Later, replace localStorage with your Node.js API.
+    let user = JSON.parse(localStorage.getItem("loggedInUser")) || {
+      fullName: "Guest User",
+      username: "guestuser",
+      email: "guest@example.com",
+      phone: "",
+      country: "",
+      travelStyle: ""
+    };
+
+    function getInitials(fullName) {
+      return fullName
+        .trim()
+        .split(" ")
+        .map(word => word[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase();
+    }
+
+    function showUserData() {
+      document.getElementById("fullName").value = user.fullName;
+      document.getElementById("username").value = user.username;
+      document.getElementById("email").value = user.email;
+      document.getElementById("phone").value = user.phone;
+      document.getElementById("country").value = user.country;
+      document.getElementById("travelStyle").value = user.travelStyle;
+
+      document.getElementById("profileName").textContent = user.fullName;
+      document.getElementById("sidebarName").textContent = user.fullName;
+
+      const initials = getInitials(user.fullName);
+      document.getElementById("profileInitials").textContent = initials;
+      document.getElementById("sidebarInitials").textContent = initials;
+    }
+
+    document.getElementById("profileForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      user = {
+        fullName: document.getElementById("fullName").value,
+        username: document.getElementById("username").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        country: document.getElementById("country").value,
+        travelStyle: document.getElementById("travelStyle").value
+      };
+
+      localStorage.setItem("loggedInUser", JSON.stringify(user));
+      showUserData();
+      alert("Your profile was updated successfully.");
+    });
+
+    document.getElementById("logoutButton").addEventListener("click", function () {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "login.html";
+    });
+
+    showUserData();
+  </script>
+</body>
+</html>
