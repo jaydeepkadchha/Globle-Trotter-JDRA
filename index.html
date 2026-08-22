@@ -1,179 +1,404 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GlobeTrotter — Travel Planner</title>
-    <!-- Link to your new CSS file -->
+
+    <title>GlobeTrotter | Your Journey Starts Here</title>
+
     <link rel="stylesheet" href="css/style.css">
 </head>
+
+
 <body>
 
-<div class="app">
-    <!-- Sidebar -->
-    <aside class="sidebar fade-down" style="--delay: 0s;">
-        <div class="logo">
-            <h1>Globe<span>Trotter</span></h1>
-            <p>PLAN • EXPLORE • EXPERIENCE</p>
+    <!-- =================================================
+         NAVBAR
+    ================================================== -->
+
+    <header class="landing-nav">
+
+        <a href="index.html" class="landing-logo">
+            ✈ Globe<span>Trotter</span>
+        </a>
+
+
+        <div class="landing-nav-actions">
+
+            <a href="login.html" class="nav-login">
+                Log in
+            </a>
+
+            <a href="register.html" class="nav-register">
+                Get Started
+            </a>
+
         </div>
 
-        <nav class="nav">
-            <button class="nav-item active">🏠 <span>Dashboard</span></button>
-            <button class="nav-item">🧳 <span>My Trips</span></button>
-            <button class="nav-item">🗺️ <span>Explore</span></button>
-            <button class="nav-item">📅 <span>Calendar</span></button>
-            <button class="nav-item">💰 <span>Budget</span></button>
-            <button class="nav-item">⚙️ <span>Settings</span></button>
-        </nav>
+    </header>
 
-        <div class="sidebar-bottom">
-            <div class="profile-mini">
-                <div class="avatar">YG</div>
-                <div>
-                    <strong>Guest User</strong>
-                    <small>Pro Traveler</small>
+
+
+    <!-- =================================================
+         HERO
+    ================================================== -->
+
+    <main>
+
+        <section class="landing-hero">
+
+            <div class="hero-left">
+
+                <span class="eyebrow">
+                    YOUR TRIP. YOUR WAY. 🌍
+                </span>
+
+                <h1>
+                    The world is
+                    <span>waiting.</span>
+                </h1>
+
+                <p>
+                    Got a place you've always wanted to visit?
+                    Let's turn that "someday" trip into an actual
+                    plan.
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="register.html"
+                        class="landing-primary-btn">
+
+                        Start Planning →
+
+                    </a>
+
+                    <a
+                        href="login.html"
+                        class="landing-secondary-btn">
+
+                        I already have an account
+
+                    </a>
+
                 </div>
-            </div>
-        </div>
-    </aside>
 
-    <!-- Main Content -->
-    <main class="main">
-        <div class="topbar fade-down" style="--delay: 0.1s;">
-            <div class="welcome">
-                <h2>Good morning!</h2>
-                <p>Ready for your next adventure?</p>
-            </div>
-            <div class="top-actions">
-                <button class="icon-btn">🔔</button>
-                <button class="icon-btn">🔍</button>
-            </div>
-        </div>
 
-        <section class="hero fade-down" style="--delay: 0.2s;">
-            <div class="hero-content">
-                <small>Your next adventure</small>
-                <h1>Where will you go next?</h1>
-                <p>Create a personalized itinerary, discover amazing destinations and keep your entire journey organized in one place.</p>
-                <button id="planTripBtn" class="primary-btn">+ Plan a New Trip</button>
+                <div class="tiny-note">
+
+                    ✦ No complicated spreadsheets.
+                    Just better trips.
+
+                </div>
+
             </div>
+
+
+            <!-- RIGHT VISUAL -->
+
+            <div class="hero-right">
+
+                <div class="travel-card main-travel-card">
+
+                    <div class="travel-card-top">
+
+                        <span>
+                            NEXT ADVENTURE
+                        </span>
+
+                        <span>
+                            ✦
+                        </span>
+
+                    </div>
+
+
+                    <div class="destination-big">
+
+                        <span class="country-emoji">
+                            🇯🇵
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Japan
+                            </h3>
+
+                            <p>
+                                Tokyo · Kyoto · Osaka
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="trip-details">
+
+                        <div>
+                            <small>WHEN</small>
+                            <strong>12 – 21 Oct</strong>
+                        </div>
+
+                        <div>
+                            <small>DAYS</small>
+                            <strong>10</strong>
+                        </div>
+
+                        <div>
+                            <small>BUDGET</small>
+                            <strong>₹85K</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="mini-progress">
+
+                        <div class="mini-progress-bar"></div>
+
+                    </div>
+
+                    <small class="progress-text">
+                        Your trip is 75% planned
+                    </small>
+
+                </div>
+
+
+                <!-- FLOATING CARDS -->
+
+                <div class="floating-card floating-one">
+
+                    <span>
+                        📍
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            7 destinations
+                        </strong>
+
+                        <small>
+                            on your bucket list
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="floating-card floating-two">
+
+                    <span>
+                        ✈️
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Your next adventure
+                        </strong>
+
+                        <small>
+                            is closer than you think
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </section>
 
-        <!-- Upcoming Trips -->
-        <section class="section fade-down" style="--delay: 0.3s;">
-            <div class="section-header">
-                <h3>Upcoming Trips</h3>
-                <button class="view-all">View all &rarr;</button>
+
+
+        <!-- =================================================
+             FEATURES
+        ================================================== -->
+
+        <section class="features">
+
+            <div class="section-intro">
+
+                <span class="eyebrow">
+                    WHY GLOBETROTTER?
+                </span>
+
+                <h2>
+                    Planning shouldn't feel like work.
+                </h2>
+
+                <p>
+                    You bring the destination.
+                    We'll help with the rest.
+                </p>
+
             </div>
 
-            <div class="trip-grid">
-                <div class="trip-card">
-                    <div class="trip-img bg-goa">🌴 Goa Getaway</div>
-                    <h4>Beach Retreat</h4>
-                    <p class="trip-meta">12 Jun — 20 Jun • 2 destinations</p>
-                    <div class="trip-progress">
-                        <div class="progress-bar" style="width: 75%;"></div>
-                    </div>
-                </div>
 
-                <div class="trip-card">
-                    <div class="trip-img bg-japan">🇯🇵 Japan</div>
-                    <h4>Tokyo & Kyoto</h4>
-                    <p class="trip-meta">04 Aug — 15 Aug • 4 destinations</p>
-                    <div class="trip-progress">
-                        <div class="progress-bar" style="width: 42%;"></div>
-                    </div>
-                </div>
+            <div class="feature-grid">
 
-                <div class="trip-card">
-                    <div class="trip-img bg-bali">🥥 Bali</div>
-                    <h4>Island Hopping</h4>
-                    <p class="trip-meta">18 Sep — 27 Sep • 3 destinations</p>
-                    <div class="trip-progress">
-                        <div class="progress-bar" style="width: 20%;"></div>
+
+                <!-- FEATURE 1 -->
+
+                <article class="feature-card">
+
+                    <div class="feature-icon seafoam-icon">
+                        🗺️
                     </div>
-                </div>
+
+                    <h3>
+                        Build your itinerary
+                    </h3>
+
+                    <p>
+                        Put everything in one place —
+                        places to visit, things to do,
+                        and those little spots you don't
+                        want to forget.
+                    </p>
+
+                </article>
+
+
+
+                <!-- FEATURE 2 -->
+
+                <article class="feature-card">
+
+                    <div class="feature-icon peach-icon">
+                        💰
+                    </div>
+
+                    <h3>
+                        Keep an eye on your budget
+                    </h3>
+
+                    <p>
+                        Know where your money is going
+                        before your vacation turns into
+                        an expensive surprise.
+                    </p>
+
+                </article>
+
+
+
+                <!-- FEATURE 3 -->
+
+                <article class="feature-card">
+
+                    <div class="feature-icon taupe-icon">
+                        📅
+                    </div>
+
+                    <h3>
+                        Keep your days organised
+                    </h3>
+
+                    <p>
+                        No more digging through notes,
+                        screenshots and ten different
+                        apps to remember what's happening.
+                    </p>
+
+                </article>
+
+
+
+                <!-- FEATURE 4 -->
+
+                <article class="feature-card">
+
+                    <div class="feature-icon dark-icon">
+                        ✨
+                    </div>
+
+                    <h3>
+                        Make it yours
+                    </h3>
+
+                    <p>
+                        Travel your way. Whether you're
+                        chasing food, history, beaches or
+                        just a quiet place to disappear.
+                    </p>
+
+                </article>
+
             </div>
+
         </section>
 
-        <!-- Lower Section -->
-        <div class="lower-grid fade-down" style="--delay: 0.4s;">
-            <!-- Recommendations -->
-            <section class="section" style="margin-top: 0;">
-                <div class="section-header">
-                    <h3>Explore Destinations</h3>
-                    <button class="view-all">Explore all &rarr;</button>
-                </div>
 
-                <div class="dest-card">
-                    <div class="dest-icon">🗼</div>
-                    <div class="dest-info">
-                        <strong>Paris, France</strong>
-                        <span>Culture • Food • Architecture</span>
-                    </div>
-                    <div class="cost">$$$</div>
-                </div>
 
-                <div class="dest-card">
-                    <div class="dest-icon" style="background: var(--pearl);">🗻</div>
-                    <div class="dest-info">
-                        <strong>Tokyo, Japan</strong>
-                        <span>Technology • Food • Adventure</span>
-                    </div>
-                    <div class="cost">$$$</div>
-                </div>
+        <!-- =================================================
+             FINAL CTA
+        ================================================== -->
 
-                <div class="dest-card">
-                    <div class="dest-icon" style="background: var(--seafoam);">🏛️</div>
-                    <div class="dest-info">
-                        <strong>Rome, Italy</strong>
-                        <span>History • Culture • Food</span>
-                    </div>
-                    <div class="cost">$$</div>
-                </div>
-            </section>
+        <section class="final-cta">
 
-            <!-- Budget Widget -->
-            <section class="section" style="margin-top: 0;">
-                <div class="section-header">
-                    <h3>Trip Budget</h3>
-                </div>
+            <div>
 
-                <div class="budget-card">
-                    <p>Goa Getaway</p>
-                    <div class="budget-value">₹32,400</div>
-                    <div class="budget-track">
-                        <div class="budget-fill"></div>
-                    </div>
-                    <div class="budget-details">
-                        <span>₹32,400 spent</span>
-                        <span>₹45,000 budget</span>
-                    </div>
-                </div>
-            </section>
-        </div>
+                <span class="eyebrow">
+                    ONE MORE THING...
+                </span>
+
+                <h2>
+                    So, where are we going?
+                </h2>
+
+                <p>
+                    Your next story could start with
+                    a simple click.
+                </p>
+
+            </div>
+
+
+            <a
+                href="register.html"
+                class="landing-primary-btn">
+
+                Let's Plan a Trip ✈
+
+            </a>
+
+        </section>
+
     </main>
-</div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const navItems = document.querySelectorAll('.nav-item');
-        
-        navItems.forEach(item => {
-            item.addEventListener('click', (e) => {
-                document.querySelector('.nav-item.active')?.classList.remove('active');
-                e.currentTarget.classList.add('active');
-            });
-        });
 
-        const planBtn = document.getElementById('planTripBtn');
-        if (planBtn) {
-            planBtn.addEventListener('click', () => {
-                console.log("Trip creation initialized...");
-                alert("Trip creation modal coming soon!");
-            });
-        }
-    });
-</script>
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <footer class="landing-footer">
+
+        <span>
+            ✈ GlobeTrotter
+        </span>
+
+        <p>
+            Made for people who'd rather collect
+            memories than magnets.
+        </p>
+
+        <span>
+            © 2026 GlobeTrotter
+        </span>
+
+    </footer>
+
+
 </body>
+
 </html>

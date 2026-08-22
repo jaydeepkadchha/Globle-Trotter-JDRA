@@ -3,594 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>GlobeTrotter | Dashboard</title>
-
+    <title>GlobeTrotter — Travel Planner</title>
+    <!-- Link to your new CSS file -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-    <!-- =========================
-         SIDEBAR
-    ========================== -->
-
-    <aside class="sidebar">
-
-        <div class="sidebar-logo">
-            ✈ <span>GlobeTrotter</span>
+<div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar fade-down" style="--delay: 0s;">
+        <div class="logo">
+            <h1>Globe<span>Trotter</span></h1>
+            <p>PLAN • EXPLORE • EXPERIENCE</p>
         </div>
 
-        <nav class="sidebar-nav">
-
-            <a href="dashboard.html" class="nav-item active">
-                <span>⌂</span>
-                Dashboard
-            </a>
-
-            <a href="my-trips.html" class="nav-item">
-                <span>🧳</span>
-                My Trips
-            </a>
-
-            <a href="create-trip.html" class="nav-item">
-                <span>＋</span>
-                Create Trip
-            </a>
-
-            <a href="calendar.html" class="nav-item">
-                <span>▣</span>
-                Calendar
-            </a>
-
-            <a href="profile.html" class="nav-item">
-                <span>◎</span>
-                Profile
-            </a>
-
+        <nav class="nav">
+            <button class="nav-item active">🏠 <span>Dashboard</span></button>
+            <button class="nav-item">🧳 <span>My Trips</span></button>
+            <button class="nav-item">🗺️ <span>Explore</span></button>
+            <button class="nav-item">📅 <span>Calendar</span></button>
+            <button class="nav-item">💰 <span>Budget</span></button>
+            <button class="nav-item">⚙️ <span>Settings</span></button>
         </nav>
 
-
         <div class="sidebar-bottom">
-
-            <a href="#" class="nav-item">
-                <span>⚙</span>
-                Settings
-            </a>
-
-            <a href="login.html" class="nav-item logout">
-                <span>↪</span>
-                Logout
-            </a>
-
+            <div class="profile-mini">
+                <div class="avatar">YG</div>
+                <div>
+                    <strong>Guest User</strong>
+                    <small>Pro Traveler</small>
+                </div>
+            </div>
         </div>
-
     </aside>
 
-
-    <!-- =========================
-         MAIN CONTENT
-    ========================== -->
-
-    <main class="dashboard">
-
-        <!-- TOP BAR -->
-
-        <header class="dashboard-header">
-
-            <div>
-                <p class="welcome-small">
-                    Welcome back 👋
-                </p>
-
-                <h1>
-                    Plan your next adventure.
-                </h1>
+    <!-- Main Content -->
+    <main class="main">
+        <div class="topbar fade-down" style="--delay: 0.1s;">
+            <div class="welcome">
+                <h2>Good morning!</h2>
+                <p>Ready for your next adventure?</p>
             </div>
-
-
-            <div class="header-actions">
-
-                <button class="notification-btn">
-                    ♢
-                </button>
-
-                <div class="user-profile">
-
-                    <div class="avatar">
-                        A
-                    </div>
-
-                    <div>
-                        <strong>Arhan</strong>
-                        <small>Traveler</small>
-                    </div>
-
-                </div>
-
+            <div class="top-actions">
+                <button class="icon-btn">🔔</button>
+                <button class="icon-btn">🔍</button>
             </div>
-
-        </header>
-
-
-        <!-- =========================
-             HERO / CREATE TRIP
-        ========================== -->
-
-        <section class="dashboard-hero">
-
-            <div class="hero-content">
-
-                <span class="hero-label">
-                    YOUR NEXT JOURNEY
-                </span>
-
-                <h2>
-                    Where will you<br>
-                    go next?
-                </h2>
-
-                <p>
-                    Create a personalized itinerary,
-                    discover destinations and keep your
-                    entire trip organized in one place.
-                </p>
-
-                <a
-                    href="create-trip.html"
-                    class="primary-btn">
-
-                    + Create New Trip
-
-                </a>
-
-            </div>
-
-
-            <div class="hero-decoration">
-
-                <div class="compass">
-                    ✦
-                </div>
-
-                <div class="hero-circle circle-one"></div>
-                <div class="hero-circle circle-two"></div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             QUICK STATS
-        ========================== -->
-
-        <section class="stats-grid">
-
-            <div class="stat-card">
-
-                <div class="stat-icon seafoam">
-                    🧳
-                </div>
-
-                <div>
-                    <span>Active Trips</span>
-                    <strong>2</strong>
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon peach">
-                    📍
-                </div>
-
-                <div>
-                    <span>Destinations</span>
-                    <strong>7</strong>
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon taupe">
-                    🌍
-                </div>
-
-                <div>
-                    <span>Countries Visited</span>
-                    <strong>4</strong>
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon charcoal">
-                    📅
-                </div>
-
-                <div>
-                    <span>Upcoming Days</span>
-                    <strong>18</strong>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             CONTENT GRID
-        ========================== -->
-
-        <div class="dashboard-grid">
-
-
-            <!-- =========================
-                 UPCOMING TRIPS
-            ========================== -->
-
-            <section class="dashboard-section">
-
-                <div class="section-header">
-
-                    <div>
-                        <span class="section-label">
-                            YOUR JOURNEYS
-                        </span>
-
-                        <h2>
-                            Upcoming Trips
-                        </h2>
-                    </div>
-
-                    <a href="my-trips.html">
-                        View all →
-                    </a>
-
-                </div>
-
-
-                <div class="trip-list">
-
-
-                    <!-- TRIP 1 -->
-
-                    <article class="trip-card">
-
-                        <div class="trip-image japan-image">
-                            <span>🇯🇵</span>
-                        </div>
-
-                        <div class="trip-info">
-
-                            <div class="trip-title">
-
-                                <div>
-                                    <h3>Japan Adventure</h3>
-
-                                    <p>
-                                        Tokyo · Kyoto · Osaka
-                                    </p>
-                                </div>
-
-                                <span class="trip-status">
-                                    Upcoming
-                                </span>
-
-                            </div>
-
-
-                            <div class="trip-meta">
-
-                                <span>
-                                    📅 12 – 21 Oct
-                                </span>
-
-                                <span>
-                                    💰 ₹85,000
-                                </span>
-
-                                <span>
-                                    10 days
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- TRIP 2 -->
-
-                    <article class="trip-card">
-
-                        <div class="trip-image italy-image">
-                            <span>🇮🇹</span>
-                        </div>
-
-                        <div class="trip-info">
-
-                            <div class="trip-title">
-
-                                <div>
-                                    <h3>Italian Escape</h3>
-
-                                    <p>
-                                        Rome · Florence · Venice
-                                    </p>
-                                </div>
-
-                                <span class="trip-status">
-                                    Planning
-                                </span>
-
-                            </div>
-
-
-                            <div class="trip-meta">
-
-                                <span>
-                                    📅 05 – 14 Dec
-                                </span>
-
-                                <span>
-                                    💰 ₹1,10,000
-                                </span>
-
-                                <span>
-                                    10 days
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-                </div>
-
-            </section>
-
-
-            <!-- =========================
-                 QUICK ACTIONS
-            ========================== -->
-
-            <section class="quick-actions-section">
-
-                <div class="section-header">
-
-                    <div>
-                        <span class="section-label">
-                            SHORTCUTS
-                        </span>
-
-                        <h2>
-                            Quick Actions
-                        </h2>
-                    </div>
-
-                </div>
-
-
-                <div class="quick-actions">
-
-                    <a
-                        href="create-trip.html"
-                        class="quick-action">
-
-                        <div class="quick-icon seafoam">
-                            ＋
-                        </div>
-
-                        <div>
-                            <strong>Create Trip</strong>
-
-                            <span>
-                                Start planning
-                            </span>
-                        </div>
-
-                        <b>→</b>
-
-                    </a>
-
-
-                    <a
-                        href="calendar.html"
-                        class="quick-action">
-
-                        <div class="quick-icon peach">
-                            ▣
-                        </div>
-
-                        <div>
-                            <strong>View Calendar</strong>
-
-                            <span>
-                                Check your schedule
-                            </span>
-                        </div>
-
-                        <b>→</b>
-
-                    </a>
-
-
-                    <a
-                        href="#destinations"
-                        class="quick-action">
-
-                        <div class="quick-icon taupe">
-                            ◉
-                        </div>
-
-                        <div>
-                            <strong>Explore</strong>
-
-                            <span>
-                                Discover destinations
-                            </span>
-                        </div>
-
-                        <b>→</b>
-
-                    </a>
-
-                </div>
-
-            </section>
-
         </div>
 
-
-        <!-- =========================
-             RECOMMENDED DESTINATIONS
-        ========================== -->
-
-        <section
-            class="recommendations"
-            id="destinations">
-
-            <div class="section-header">
-
-                <div>
-
-                    <span class="section-label">
-                        GET INSPIRED
-                    </span>
-
-                    <h2>
-                        Recommended for You
-                    </h2>
-
-                </div>
-
-                <a href="#">
-                    Explore all →
-                </a>
-
+        <section class="hero fade-down" style="--delay: 0.2s;">
+            <div class="hero-content">
+                <small>Your next adventure</small>
+                <h1>Where will you go next?</h1>
+                <p>Create a personalized itinerary, discover amazing destinations and keep your entire journey organized in one place.</p>
+                <button id="planTripBtn" class="primary-btn">+ Plan a New Trip</button>
             </div>
-
-
-            <div class="destination-grid">
-
-
-                <!-- DESTINATION 1 -->
-
-                <article class="destination-card destination-japan">
-
-                    <div class="destination-overlay">
-
-                        <span class="destination-tag">
-                            TRENDING
-                        </span>
-
-                        <div>
-
-                            <h3>Kyoto, Japan</h3>
-
-                            <p>
-                                Culture · Food · History
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- DESTINATION 2 -->
-
-                <article class="destination-card destination-paris">
-
-                    <div class="destination-overlay">
-
-                        <span class="destination-tag">
-                            POPULAR
-                        </span>
-
-                        <div>
-
-                            <h3>Paris, France</h3>
-
-                            <p>
-                                Art · Romance · Cuisine
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- DESTINATION 3 -->
-
-                <article class="destination-card destination-bali">
-
-                    <div class="destination-overlay">
-
-                        <span class="destination-tag">
-                            RELAX
-                        </span>
-
-                        <div>
-
-                            <h3>Bali, Indonesia</h3>
-
-                            <p>
-                                Beaches · Nature · Adventure
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- DESTINATION 4 -->
-
-                <article class="destination-card destination-switzerland">
-
-                    <div class="destination-overlay">
-
-                        <span class="destination-tag">
-                            EXPLORE
-                        </span>
-
-                        <div>
-
-                            <h3>Swiss Alps</h3>
-
-                            <p>
-                                Mountains · Nature · Adventure
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-            </div>
-
         </section>
 
+        <!-- Upcoming Trips -->
+        <section class="section fade-down" style="--delay: 0.3s;">
+            <div class="section-header">
+                <h3>Upcoming Trips</h3>
+                <button class="view-all">View all &rarr;</button>
+            </div>
+
+            <div class="trip-grid">
+                <div class="trip-card">
+                    <div class="trip-img bg-goa">🌴 Goa Getaway</div>
+                    <h4>Beach Retreat</h4>
+                    <p class="trip-meta">12 Jun — 20 Jun • 2 destinations</p>
+                    <div class="trip-progress">
+                        <div class="progress-bar" style="width: 75%;"></div>
+                    </div>
+                </div>
+
+                <div class="trip-card">
+                    <div class="trip-img bg-japan">🇯🇵 Japan</div>
+                    <h4>Tokyo & Kyoto</h4>
+                    <p class="trip-meta">04 Aug — 15 Aug • 4 destinations</p>
+                    <div class="trip-progress">
+                        <div class="progress-bar" style="width: 42%;"></div>
+                    </div>
+                </div>
+
+                <div class="trip-card">
+                    <div class="trip-img bg-bali">🥥 Bali</div>
+                    <h4>Island Hopping</h4>
+                    <p class="trip-meta">18 Sep — 27 Sep • 3 destinations</p>
+                    <div class="trip-progress">
+                        <div class="progress-bar" style="width: 20%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lower Section -->
+        <div class="lower-grid fade-down" style="--delay: 0.4s;">
+            <!-- Recommendations -->
+            <section class="section" style="margin-top: 0;">
+                <div class="section-header">
+                    <h3>Explore Destinations</h3>
+                    <button class="view-all">Explore all &rarr;</button>
+                </div>
+
+                <div class="dest-card">
+                    <div class="dest-icon">🗼</div>
+                    <div class="dest-info">
+                        <strong>Paris, France</strong>
+                        <span>Culture • Food • Architecture</span>
+                    </div>
+                    <div class="cost">$$$</div>
+                </div>
+
+                <div class="dest-card">
+                    <div class="dest-icon" style="background: var(--pearl);">🗻</div>
+                    <div class="dest-info">
+                        <strong>Tokyo, Japan</strong>
+                        <span>Technology • Food • Adventure</span>
+                    </div>
+                    <div class="cost">$$$</div>
+                </div>
+
+                <div class="dest-card">
+                    <div class="dest-icon" style="background: var(--seafoam);">🏛️</div>
+                    <div class="dest-info">
+                        <strong>Rome, Italy</strong>
+                        <span>History • Culture • Food</span>
+                    </div>
+                    <div class="cost">$$</div>
+                </div>
+            </section>
+
+            <!-- Budget Widget -->
+            <section class="section" style="margin-top: 0;">
+                <div class="section-header">
+                    <h3>Trip Budget</h3>
+                </div>
+
+                <div class="budget-card">
+                    <p>Goa Getaway</p>
+                    <div class="budget-value">₹32,400</div>
+                    <div class="budget-track">
+                        <div class="budget-fill"></div>
+                    </div>
+                    <div class="budget-details">
+                        <span>₹32,400 spent</span>
+                        <span>₹45,000 budget</span>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
+</div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                document.querySelector('.nav-item.active')?.classList.remove('active');
+                e.currentTarget.classList.add('active');
+            });
+        });
 
-    <script src="js/dashboard.js"></script>
-
+        const planBtn = document.getElementById('planTripBtn');
+        if (planBtn) {
+            planBtn.addEventListener('click', () => {
+                console.log("Trip creation initialized...");
+                alert("Trip creation modal coming soon!");
+            });
+        }
+    });
+</script>
 </body>
 </html>
